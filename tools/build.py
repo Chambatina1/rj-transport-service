@@ -585,7 +585,7 @@ def page_home(lang):
 
 <section class="section" id="why"><div class="wrap">
   <div class="years">
-    <div class="big" aria-hidden="true">2004<small>{t('on the road since', 'en la carretera desde')}</small></div>
+    <div class="big" aria-hidden="true"><small>{t('On the road since', 'En la carretera desde')}</small>2004</div>
     <div>
       <span class="kicker">{t('Why companies stay with us', 'Por qué las empresas se quedan')}</span>
       <h2>{t('A carrier, not a broker.', 'Un transportista, no un intermediario.')}</h2>

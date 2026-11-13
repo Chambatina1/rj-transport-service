@@ -152,7 +152,7 @@ h3{font-size:clamp(22px,2.2vw,27px);line-height:1.05}
 /* Years band */
 .years{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center}
 .years .big{font-family:var(--display);font-weight:800;font-size:clamp(130px,19vw,250px);line-height:.8;color:transparent;-webkit-text-stroke:2px var(--red2);letter-spacing:-4px}
-.years .big small{display:block;font-size:.2em;-webkit-text-stroke:0;color:#fff;letter-spacing:3px;margin-top:14px;text-transform:uppercase}
+.years .big small{display:block;font-size:.2em;-webkit-text-stroke:0;color:#fff;letter-spacing:3px;margin:0 0 14px;text-transform:uppercase}
 .timeline{list-style:none;display:grid;gap:0;border-left:2px solid var(--line);margin-top:30px}
 .timeline li{position:relative;padding:0 0 22px 26px}
 .timeline li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;background:var(--red);border-radius:2px}
