@@ -10,6 +10,7 @@ The hosting (Render static site) serves the generated files as-is.
 import json
 import os
 import shutil
+import hashlib
 from datetime import date
 from html import escape
 
@@ -44,6 +45,11 @@ SITE = {
     "google_write_review_url": "",
 }
 BUILD_DATE = date.today().isoformat()
+_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+def _ver(path):
+    with open(os.path.join(_ROOT, path), "rb") as f:
+        return hashlib.sha1(f.read()).hexdigest()[:10]
+CSS_V, JS_V = _ver("assets/site.css"), _ver("assets/site.js")
 MAPS_URL = "https://www.google.com/maps/search/?api=1&query=" + "4980+Patch+Rd+Orlando+FL+32822"
 
 # ---------------------------------------------------------------------------
@@ -453,7 +459,7 @@ def shell(lang, key, title, desc, body, schemas=(), og_image="/img/yard-wrecker.
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;600;700&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v={BUILD_DATE}">
+<link rel="stylesheet" href="/assets/site.css?v={CSS_V}">
 {schema_html}
 </head>
 <body>
@@ -491,7 +497,7 @@ def shell(lang, key, title, desc, body, schemas=(), og_image="/img/yard-wrecker.
   </div>
 </footer>
 <div class="callbar"><a class="call" href="tel:{SITE['phone_e164']}">{ic('phone')}{ui['call']}</a><a href="{url('contact', lang)}#quote">{ui['text_us']}</a></div>
-<script src="/assets/site.js?v={BUILD_DATE}" defer></script>
+<script src="/assets/site.js?v={JS_V}" defer></script>
 </body>
 </html>
 """

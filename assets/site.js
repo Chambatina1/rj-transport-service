@@ -97,7 +97,12 @@
     if (endpoint) {
       btn.disabled = true; show(T.sending);
       fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(payload) })
-        .then(function (r) { if (!r.ok) throw new Error(r.status); show(T.ok, true); form.reset(); setMode(mode); })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function (j) {
+          /* FormSubmit answers HTTP 200 with success "false" while the inbox is not activated: treat that as a failure */
+          if (!j || String(j.success) !== "true") throw new Error((j && j.message) || "not sent");
+          show(T.ok, true); form.reset(); setMode(mode);
+        })
         .catch(function () { show(T.err); })
         .then(function () { btn.disabled = false; });
       return;
