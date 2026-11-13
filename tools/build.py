@@ -21,8 +21,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Business facts (NAP) — keep identical everywhere for local SEO.
 # ---------------------------------------------------------------------------
 SITE = {
-    "name": "R&J Transport Service Inc",
-    "legal": "R & J Transport Service Inc",
+    "name": "R&J Transport Service Inc.",
+    "legal": "R&J Transport Service Inc.",
     "domain": "https://www.rjtransportservicesinc.com",
     "phone_display": "(407) 595-9726",
     "phone_e164": "+14075959726",
@@ -148,7 +148,7 @@ UI = {
         "lang_label": "ES", "lang_title": "Ver en español", "home": "Home",
         "foot_about": "Heavy towing and freight trucking from Orlando, Florida since 2004. Statewide, across the Southeast and further north.",
         "foot_services": "Services", "foot_areas": "Service Areas", "foot_contact": "Contact", "rights": "All rights reserved.",
-        "hours": "Open 24 hours, 7 days", "directions": "Get directions", "text_us": "Quote",
+        "hours": "Open 24 hours, 7 days a week", "directions": "Get directions", "text_us": "Quote",
     },
     "es": {
         "nav": [("towing", "Grúa Pesada"), ("freight", "Carga y Contratos"), ("areas", "Áreas de Servicio"), ("blog", "Blog"), ("contact", "Contacto")],
@@ -275,7 +275,7 @@ def quote_section(lang, default_mode="freight", title=None, intro=None):
     c_tow = ' checked' if default_mode == "tow" else ''
     c_fr = ' checked' if default_mode == "freight" else ''
     freight_types = t(
-        ["General freight", "Steel, metal sheet & building materials", "Intermodal / drayage", "Mail & parcel freight", "Dedicated contract (recurring lanes)", "Other"],
+        ["General freight", "Steel, sheet metal & building materials", "Intermodal / drayage", "Mail & parcel freight", "Dedicated contract (recurring lanes)", "Other"],
         ["Carga general", "Acero, láminas de metal y materiales de construcción", "Intermodal / drayage", "Correo y paquetería", "Contrato dedicado (rutas recurrentes)", "Otro"])
     vehicle_types = t(
         ["Tractor-trailer / semi", "Box truck / straight truck", "Bus / coach / RV", "Dump truck / construction equipment", "Other heavy vehicle"],
@@ -461,7 +461,7 @@ def shell(lang, key, title, desc, body, schemas=(), og_image="/img/yard-wrecker.
 <div class="topstrip"><div class="wrap"><div class="ts-left"><span class="live">{ui['strip_left']}</span></div><div class="ts-right">{ui['strip_right']}</div></div></div>
 <header class="site-header">
   <div class="wrap nav">
-    <a class="logo" href="{url('home', lang)}" aria-label="{SITE['name']} — {ui['home']}">{LOGO_SVG}<span class="logo-text">Transport Service Inc<small>Orlando · {'Est.' if lang == 'en' else 'Desde'} 2004</small></span></a>
+    <a class="logo" href="{url('home', lang)}" aria-label="{SITE['name']} — {ui['home']}">{LOGO_SVG}<span class="logo-text">Transport Service Inc.<small>Orlando · {'Est.' if lang == 'en' else 'Desde'} 2004</small></span></a>
     <nav aria-label="{'Main' if lang == 'en' else 'Principal'}"><ul class="nav-links">{nav_items}</ul></nav>
     <a class="lang" href="{url(key, other)}" hreflang="{other}" lang="{other}" title="{ui['lang_title']}">{ui['lang_label']}</a>
     <a class="btn btn-red" href="tel:{SITE['phone_e164']}">{ic('phone')}<span class="btn-label">{SITE['phone_display']}</span></a>
@@ -476,7 +476,7 @@ def shell(lang, key, title, desc, body, schemas=(), og_image="/img/yard-wrecker.
   <div class="wrap">
     <div class="foot">
       <div>
-        <a class="logo" href="{url('home', lang)}">{LOGO_SVG}<span class="logo-text" style="color:#fff">Transport Service Inc<small>Orlando, Florida</small></span></a>
+        <a class="logo" href="{url('home', lang)}">{LOGO_SVG}<span class="logo-text" style="color:#fff">Transport Service Inc.<small>Orlando, Florida</small></span></a>
         <p>{ui['foot_about']}</p>
       </div>
       <div><h2>{ui['foot_services']}</h2><ul>{foot_services}</ul></div>
@@ -487,7 +487,7 @@ def shell(lang, key, title, desc, body, schemas=(), og_image="/img/yard-wrecker.
         <a href="{MAPS_URL}" target="_blank" rel="noopener">{ui['directions']} &rarr;</a></address>
       </div>
     </div>
-    <div class="foot-base"><span>&copy; {date.today().year} {SITE['legal']}. {ui['rights']}</span><span><a href="{url(key, other)}" hreflang="{other}">{'Español' if other == 'es' else 'English'}</a></span></div>
+    <div class="foot-base"><span>&copy; {date.today().year} {SITE['legal']} {ui['rights']}</span><span><a href="{url(key, other)}" hreflang="{other}">{'Español' if other == 'es' else 'English'}</a></span></div>
   </div>
 </footer>
 <div class="callbar"><a class="call" href="tel:{SITE['phone_e164']}">{ic('phone')}{ui['call']}</a><a href="{url('contact', lang)}#quote">{ui['text_us']}</a></div>
@@ -533,13 +533,13 @@ def page_home(lang):
         ("Where are you located?", "Our yard and office are at 4980 Patch Rd, Orlando, FL 32822, in southeast Orlando with quick access to SR 528, the Florida Turnpike and I-4."),
         ("Do you haul freight outside Florida?", "Yes. We run freight across all of Florida, into neighboring states such as Georgia and Alabama, and further north along the I-75 and I-95 corridors. Tell us your lanes and we will quote them."),
         ("Do you work with large companies on recurring contracts?", "Yes. We set up dedicated lanes and recurring schedules for shippers, distributors, manufacturers and construction companies, with one dispatcher as your point of contact."),
-        ("How long have you been in business?", "R&J Transport Service Inc has been operating out of Orlando since 2004."),
+        ("How long have you been in business?", "R&J Transport Service Inc. has been operating out of Orlando since 2004."),
     ], [
         ("¿Ofrecen grúa pesada las 24 horas?", "Sí. Nuestra línea de grúa pesada, (407) 595-9726, atiende las 24 horas, los 7 días de la semana, incluidos fines de semana y feriados."),
         ("¿Dónde están ubicados?", "Nuestro patio y oficina están en 4980 Patch Rd, Orlando, FL 32822, en el sureste de Orlando, con acceso rápido a la SR 528, el Florida Turnpike y la I-4."),
         ("¿Transportan carga fuera de Florida?", "Sí. Movemos carga por toda Florida, hacia estados vecinos como Georgia y Alabama, y más al norte por los corredores de la I-75 y la I-95. Díganos sus rutas y se las cotizamos."),
         ("¿Trabajan con empresas grandes por contrato?", "Sí. Armamos rutas dedicadas y horarios recurrentes para embarcadores, distribuidores, fabricantes y constructoras, con un solo despachador como su contacto."),
-        ("¿Cuánto tiempo llevan en el negocio?", "R&J Transport Service Inc opera desde Orlando desde 2004."),
+        ("¿Cuánto tiempo llevan en el negocio?", "R&J Transport Service Inc. opera desde Orlando desde 2004."),
     ])
     body = f"""
 <section class="hero hero-collage">
@@ -548,7 +548,7 @@ def page_home(lang):
     <div>
       <span class="kicker">{t('Orlando, Florida · Since 2004', 'Orlando, Florida · Desde 2004')}</span>
       <h1><span class="thin">{t('Heavy towing &amp; freight trucking', 'Grúa pesada y transporte de carga')}</span>{t('Built to move <span class="red-text">heavy</span>. Built to last.', 'Hechos para mover lo <span class="red-text">pesado</span>. Hechos para durar.')}</h1>
-      <p class="lede">{t(f'Since 2004, R&amp;J Transport Service Inc has moved freight for companies across Florida and the Southeast — and pulled heavy trucks back on the road, 24 hours a day.', f'Desde 2004, R&amp;J Transport Service Inc ha movido carga para empresas en Florida y el Sureste — y ha puesto camiones pesados de vuelta en la carretera, las 24 horas.')}</p>
+      <p class="lede">{t(f'Since 2004, R&amp;J Transport Service Inc. has moved freight for companies across Florida and the Southeast, and gotten heavy trucks back on the road, 24 hours a day, 7 days a week.', f'Desde 2004, R&amp;J Transport Service Inc. ha movido carga para empresas en Florida y el Sureste — y ha puesto camiones pesados de vuelta en la carretera, las 24 horas.')}</p>
       <div class="ctas">{call_btn(lang)}{quote_link(lang, label=t('Get a Freight Quote', 'Cotizar un Flete'), mode='freight')}</div>
     </div>
     <div class="stamp">{stamp_svg(lang)}</div>
@@ -559,7 +559,7 @@ def page_home(lang):
   <li><b><em>2004</em></b><span>{t('Operating out of Orlando', 'Operando desde Orlando')}</span></li>
   <li><b>24/7</b><span>{t('Heavy towing &amp; dispatch', 'Grúa pesada y despacho')}</span></li>
   <li><b>FL<em>+</em>SE</b><span>{t('Florida, the Southeast &amp; north', 'Florida, el Sureste y más al norte')}</span></li>
-  <li><b>#{SITE['usdot']}</b><span>{t('USDOT registered carrier', 'Transportista registrado USDOT')}</span></li>
+  <li><b>#{SITE['usdot']}</b><span>{t('USDOT-registered carrier', 'Transportista registrado USDOT')}</span></li>
 </ul></div></section>
 
 <section class="section light" id="services"><div class="wrap">
@@ -610,7 +610,7 @@ def page_home(lang):
 </div></section>
 
 <section class="section dark-alt"><div class="wrap split">
-  <figure class="split-media"><picture><source type="image/webp" srcset="/img/yard-wrecker.webp"><img src="/img/yard-wrecker.jpg" alt="{t('R&amp;J Transport Service Inc Kenworth heavy-duty wrecker at our yard, 4980 Patch Rd, Orlando FL', 'Grúa pesada Kenworth de R&amp;J Transport Service Inc en nuestro patio, 4980 Patch Rd, Orlando FL')}" width="1400" height="847" loading="lazy" decoding="async"></picture><figcaption>4980 Patch Rd · Orlando</figcaption></figure>
+  <figure class="split-media"><picture><source type="image/webp" srcset="/img/yard-wrecker.webp"><img src="/img/yard-wrecker.jpg" alt="{t('R&amp;J Transport Service Inc. Kenworth heavy-duty wrecker at our yard, 4980 Patch Rd, Orlando FL', 'Grúa pesada Kenworth de R&amp;J Transport Service Inc. en nuestro patio, 4980 Patch Rd, Orlando FL')}" width="1400" height="847" loading="lazy" decoding="async"></picture><figcaption>4980 Patch Rd · Orlando</figcaption></figure>
   <div>
     <span class="kicker">{t('Visit the yard', 'Visite el patio')}</span>
     <h2>{t('A real yard. A real crew.', 'Un patio real. Un equipo real.')}</h2>
@@ -634,8 +634,8 @@ def page_home(lang):
 
 {quote_section(lang, 'freight')}
 """
-    title = t("Heavy Towing & Freight Trucking in Orlando, FL | Since 2004 | R&J Transport",
-              "Grúa Pesada y Transporte de Carga en Orlando, FL | Desde 2004 | R&J Transport")
+    title = t("Heavy Towing & Freight Trucking in Orlando, FL | Since 2004 | R&J Transport Service Inc.",
+              "Grúa Pesada y Transporte de Carga en Orlando, FL | Desde 2004 | R&J Transport Service Inc.")
     desc = t("24-hour heavy towing and contract freight trucking from Orlando, FL since 2004. Serving all of Florida, the Southeast and beyond. Call (407) 595-9726.",
              "Grúa pesada 24 horas y transporte de carga por contrato desde Orlando, FL desde 2004. Toda Florida, el Sureste y más allá. Llame al (407) 595-9726.")
     write(url("home", lang), shell(lang, "home", title, desc, body, [faq_schema(faqs)]))
@@ -709,9 +709,9 @@ def page_towing(lang):
 </div></section>
 {quote_section(lang, 'tow', title=t('Request a tow or set up your fleet', 'Solicite una grúa o registre su flota'))}
 """
-    title = t("24 Hour Heavy Duty Towing in Orlando, FL | Semi & Truck Towing | R&J Transport",
-              "Grúa Pesada 24 Horas en Orlando, FL | Remolque de Camiones y Semis | R&J Transport")
-    desc = t("24/7 heavy duty towing in Orlando: semi-trucks, tractor-trailers, buses, box trucks and heavy equipment. Accident recovery and long-distance tows. Call (407) 595-9726.",
+    title = t("24-Hour Heavy-Duty Towing in Orlando, FL | Semi & Truck Towing | R&J Transport Service Inc.",
+              "Grúa Pesada 24 Horas en Orlando, FL | Remolque de Camiones y Semis | R&J Transport Service Inc.")
+    desc = t("24/7 heavy-duty towing in Orlando: semi-trucks, tractor-trailers, buses, box trucks and heavy equipment. Accident recovery and long-distance tows. Call (407) 595-9726.",
              "Grúa pesada 24/7 en Orlando: semis, tractocamiones, autobuses, camiones caja y equipo pesado. Rescate en accidentes y larga distancia. Llame al (407) 595-9726.")
     svc = service_schema(t("Heavy Duty Towing & Recovery", "Grúa Pesada y Rescate"), desc, url("towing", lang),
                          ["Orlando, FL", "Central Florida", "Florida"], lang, "Heavy duty towing")
@@ -722,16 +722,16 @@ def page_freight(lang):
     t = (lambda en, es: en if lang == "en" else es)
     crumbs = [(UI[lang]["home"], url("home", lang)), (t("Freight & Contracts", "Carga y Contratos"), url("freight", lang))]
     faqs = t([
-        ("What kind of freight do you haul?", "General and palletized freight, steel, metal sheet and building materials, intermodal containers (drayage), and mail and parcel freight. If you have something else, ask — we will tell you straight if it’s a fit."),
+        ("What kind of freight do you haul?", "General and palletized freight, steel, sheet metal and building materials, intermodal containers (drayage), and mail and parcel freight. If you have something else, ask — we will tell you straight if it’s a fit."),
         ("Do you offer dedicated or contract capacity?", "Yes. Dedicated lanes and recurring schedules are the core of our freight business. We build the schedule around your volume — weekly, several times a week, daily, or for the length of a project."),
         ("Which states do you cover?", "All of Florida, neighboring states such as Georgia and Alabama, and lanes further north along the I-75 and I-95 corridors, including the Carolinas and Tennessee. Send us your lanes for a quote."),
-        ("Are you a broker?", "No. R&J Transport Service Inc is an asset-based carrier, USDOT #1328058, operating our own trucks out of Orlando since 2004."),
+        ("Are you a broker?", "No. R&J Transport Service Inc. is an asset-based carrier, USDOT #1328058, operating our own trucks out of Orlando since 2004."),
         ("How do I get a contract rate?", "Send your lanes, average weekly volume and freight type through the quote form or call (407) 595-9726. We review and come back with a rate and a capacity plan."),
     ], [
         ("¿Qué tipo de carga transportan?", "Carga general y paletizada, acero, láminas de metal y materiales de construcción, contenedores intermodales (drayage) y correo y paquetería. Si tiene otra cosa, pregunte — le diremos con franqueza si encaja."),
         ("¿Ofrecen capacidad dedicada o por contrato?", "Sí. Las rutas dedicadas y los horarios recurrentes son la base de nuestro negocio de carga. Armamos el horario según su volumen — semanal, varias veces por semana, diario o por la duración de un proyecto."),
         ("¿Qué estados cubren?", "Toda Florida, estados vecinos como Georgia y Alabama, y rutas más al norte por los corredores de la I-75 y la I-95, incluidas las Carolinas y Tennessee. Envíenos sus rutas para cotizar."),
-        ("¿Son un bróker?", "No. R&J Transport Service Inc es un transportista con equipo propio, USDOT #1328058, operando nuestros camiones desde Orlando desde 2004."),
+        ("¿Son un bróker?", "No. R&J Transport Service Inc. es un transportista con equipo propio, USDOT #1328058, operando nuestros camiones desde Orlando desde 2004."),
         ("¿Cómo obtengo una tarifa por contrato?", "Envíe sus rutas, volumen semanal promedio y tipo de carga por el formulario o llame al (407) 595-9726. Lo revisamos y le respondemos con tarifa y plan de capacidad."),
     ])
     body = page_hero(lang, crumbs, t("Freight trucking · Florida &amp; the Southeast", "Transporte de carga · Florida y el Sureste"),
@@ -745,7 +745,7 @@ def page_freight(lang):
   <p>{t('We focus on the freight we know well, so your loads are handled by drivers and dispatchers who have done it before.', 'Nos enfocamos en la carga que conocemos bien, para que sus envíos los manejen choferes y despachadores con experiencia.')}</p></div>
   {features(t([
       ('box', 'General freight', 'Palletized and general cargo for distributors, retailers and manufacturers.'),
-      ('beam', 'Steel &amp; building materials', 'Metal sheet, steel and construction materials delivered to plants and job sites.'),
+      ('beam', 'Steel &amp; building materials', 'Sheet metal, steel and construction materials delivered to plants and job sites.'),
       ('rail', 'Intermodal drayage', 'Container moves between rail ramps, ports and your facility.'),
       ('mail', 'Mail &amp; parcel freight', 'Scheduled mail and package freight on dependable, recurring routes.'),
       ('calendar', 'Dedicated contract lanes', 'The same lanes, on the same schedule, with capacity reserved for you.'),
@@ -788,8 +788,8 @@ def page_freight(lang):
 </div></section>
 {quote_section(lang, 'freight', title=t('Quote your lanes', 'Cotice sus rutas'), intro=t('Send your lanes, weekly volume and freight type. We reply with a rate and a capacity plan.', 'Envíe sus rutas, volumen semanal y tipo de carga. Le respondemos con tarifa y plan de capacidad.'))}
 """
-    title = t("Freight Trucking & Dedicated Contract Hauling | Orlando, Florida & Southeast | R&J Transport",
-              "Transporte de Carga y Rutas Dedicadas por Contrato | Orlando, Florida y Sureste | R&J Transport")
+    title = t("Freight Trucking & Dedicated Contract Hauling | Orlando, Florida & Southeast | R&J Transport Service Inc.",
+              "Transporte de Carga y Rutas Dedicadas por Contrato | Orlando, Florida y Sureste | R&J Transport Service Inc.")
     desc = t("Asset-based freight carrier in Orlando since 2004. Dedicated lanes, recurring contracts, general freight, steel, intermodal drayage. Florida, Southeast and northbound. Get a quote.",
              "Transportista con equipo propio en Orlando desde 2004. Rutas dedicadas, contratos recurrentes, carga general, acero, drayage intermodal. Florida, Sureste y al norte. Cotice.")
     svc = service_schema(t("Freight Trucking & Contract Hauling", "Transporte de Carga por Contrato"), desc, url("freight", lang),
@@ -806,7 +806,7 @@ def page_areas(lang):
         for a in AREAS)
     body = page_hero(lang, crumbs, t("Service areas", "Áreas de servicio"),
                      t('Florida, the <span class="red-text">Southeast</span> &amp; Beyond', 'Florida, el <span class="red-text">Sureste</span> y Más Allá'),
-                     t("Based in Orlando since 2004. Heavy towing across Central Florida and long distance, freight lanes statewide, into neighboring states and further north.",
+                     t("Based in Orlando since 2004. Heavy towing across Central Florida and long distance; freight lanes statewide, into neighboring states and further north.",
                        "Con base en Orlando desde 2004. Grúa pesada en Florida Central y larga distancia, rutas de carga en todo el estado, estados vecinos y más al norte."), img="fleet-kenworth")
     body += f"""
 <section class="section"><div class="wrap">
@@ -819,10 +819,10 @@ def page_areas(lang):
 {cta_band(lang)}
 {quote_section(lang, 'freight')}
 """
-    title = t("Service Areas | Heavy Towing & Freight Across Florida and the Southeast | R&J Transport",
-              "Áreas de Servicio | Grúa Pesada y Carga en Florida y el Sureste | R&J Transport")
-    desc = t("R&J Transport serves Orlando, Tampa, Miami, Jacksonville, all of Florida, Georgia, Alabama, the Carolinas and Tennessee with heavy towing and freight trucking.",
-             "R&J Transport atiende Orlando, Tampa, Miami, Jacksonville, toda Florida, Georgia, Alabama, las Carolinas y Tennessee con grúa pesada y transporte de carga.")
+    title = t("Service Areas | Heavy Towing & Freight Across Florida and the Southeast | R&J Transport Service Inc.",
+              "Áreas de Servicio | Grúa Pesada y Carga en Florida y el Sureste | R&J Transport Service Inc.")
+    desc = t("R&J Transport Service Inc. serves Orlando, Tampa, Miami, Jacksonville, all of Florida, Georgia, Alabama, the Carolinas and Tennessee with heavy towing and freight trucking.",
+             "R&J Transport Service Inc. atiende Orlando, Tampa, Miami, Jacksonville, toda Florida, Georgia, Alabama, las Carolinas y Tennessee con grúa pesada y transporte de carga.")
     write(url("areas", lang), shell(lang, "areas", title, desc, body, [breadcrumb_schema(crumbs)]))
 
 
@@ -879,8 +879,8 @@ def page_contact(lang):
   <div class="ctas" style="margin-top:24px"><a class="btn btn-red" href="{MAPS_URL}" target="_blank" rel="noopener">{ic('pin')}<span>{UI[lang]['directions']}</span></a></div></div>
 </div></section>
 """
-    title = t("Contact R&J Transport Service Inc | 24/7 Dispatch (407) 595-9726 | Orlando, FL",
-              "Contacto R&J Transport Service Inc | Despacho 24/7 (407) 595-9726 | Orlando, FL")
+    title = t("Contact R&J Transport Service Inc. | 24/7 Dispatch (407) 595-9726 | Orlando, FL",
+              "Contacto R&J Transport Service Inc. | Despacho 24/7 (407) 595-9726 | Orlando, FL")
     desc = t("Call (407) 595-9726 for 24-hour heavy towing or request a freight quote. Visit us at 4980 Patch Rd, Orlando, FL 32822.",
              "Llame al (407) 595-9726 para grúa pesada 24 horas o solicite una cotización de carga. Visítenos en 4980 Patch Rd, Orlando, FL 32822.")
     cp = {"@context": "https://schema.org", "@type": "ContactPage", "url": abs_url(url("contact", lang)), "about": {"@id": ORG_ID}}
@@ -910,9 +910,9 @@ def page_blog(lang):
                        "Guías prácticas para gerentes de flota, embarcadores y choferes — de gente que remolca y transporta en Florida desde 2004."), img="cargo-crate")
     body += '<section class="section"><div class="wrap"><div class="features">%s</div></div></section>' % cards
     body += cta_band(lang)
-    title = t("Blog | Heavy Towing & Freight Trucking Guides | R&J Transport", "Blog | Guías de Grúa Pesada y Transporte de Carga | R&J Transport")
-    desc = t("Guides on heavy towing, truck breakdowns and freight contracts in Florida, from R&J Transport Service Inc in Orlando.",
-             "Guías sobre grúa pesada, averías de camiones y contratos de carga en Florida, de R&J Transport Service Inc en Orlando.")
+    title = t("Blog | Heavy Towing & Freight Trucking Guides | R&J Transport Service Inc.", "Blog | Guías de Grúa Pesada y Transporte de Carga | R&J Transport Service Inc.")
+    desc = t("Guides on heavy towing, truck breakdowns and freight contracts in Florida, from R&J Transport Service Inc. in Orlando.",
+             "Guías sobre grúa pesada, averías de camiones y contratos de carga en Florida, de R&J Transport Service Inc. en Orlando.")
     blog = {"@context": "https://schema.org", "@type": "Blog", "url": abs_url(url("blog", lang)), "inLanguage": lang, "publisher": {"@id": ORG_ID}}
     write(url("blog", lang), shell(lang, "blog", title, desc, body, [blog, breadcrumb_schema(crumbs)]))
 
@@ -921,7 +921,7 @@ def page_post(lang, p):
     t = (lambda en, es: en if lang == "en" else es)
     key = "post-" + p["key"]
     crumbs = [(UI[lang]["home"], url("home", lang)), ("Blog", url("blog", lang)), (p["title"][lang], url(key, lang))]
-    meta = '%s · <time datetime="%s">%s</time> · %s' % (escape(p["category"][lang]), p["date"], fmt_date(p["date"], lang), t("By R&amp;J Transport dispatch team", "Por el equipo de despacho de R&amp;J Transport"))
+    meta = '%s · <time datetime="%s">%s</time> · %s' % (escape(p["category"][lang]), p["date"], fmt_date(p["date"], lang), t("By the R&amp;J Transport Service Inc. dispatch team", "Por el equipo de despacho de R&amp;J Transport Service Inc."))
     body = page_hero(lang, crumbs, meta, escape(p["title"][lang]), escape(p["excerpt"][lang]), img=p.get("img", "wrecker"),
                      ctas=call_btn(lang) + quote_link(lang, mode=p.get("mode", "freight")))
     related = "".join('<li><a href="%s">%s%s</a></li>' % (url("post-" + o["key"], lang), escape(o["title"][lang]), ic("arrow")) for o in BLOG_POSTS if o["key"] != p["key"])
@@ -946,7 +946,7 @@ def page_404():
 <span class="kicker">404</span><h1>Wrong turn. <span class="red-text">We tow those too.</span></h1>
 <p class="lede">The page you are looking for isn’t here. / La página que busca no existe.</p>
 <div class="ctas"><a class="btn btn-red" href="/">Home</a><a class="btn btn-ghost" href="/es/">Inicio</a>%s</div></div></div></div></section>""" % (hero_img("wrecker", eager=True), call_btn("en", cls="btn btn-ghost", label=SITE["phone_display"]))
-    html = shell("en", "home", "Page not found | R&J Transport Service Inc", "Page not found.", body)
+    html = shell("en", "home", "Page not found | R&J Transport Service Inc.", "Page not found.", body)
     html = html.replace('<link rel="canonical"', '<meta name="robots" content="noindex"><link rel="canonical"', 1)
     SITEMAP.pop()
     with open(os.path.join(ROOT, "404.html"), "w", encoding="utf-8") as f:

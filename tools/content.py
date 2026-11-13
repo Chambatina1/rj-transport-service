@@ -14,7 +14,7 @@ AREAS = [
         "schema_areas": ["Orlando, FL", "Orange County, FL", "Osceola County, FL", "Seminole County, FL", "Lake County, FL"],
         "content": {
             "en": {
-                "title": "Heavy Towing & Freight Trucking in Orlando, FL | 24/7 | R&J Transport",
+                "title": "Heavy Towing & Freight Trucking in Orlando, FL | 24/7 | R&J Transport Service Inc.",
                 "desc": "Orlando heavy towing 24/7 and local freight trucking from our yard at 4980 Patch Rd since 2004. Semis, buses, equipment. Call (407) 595-9726.",
                 "kicker": "Orlando, FL · Home base since 2004",
                 "h1": 'Heavy Towing &amp; Trucking in <span class="red-text">Orlando</span>',
@@ -33,7 +33,7 @@ AREAS = [
                          ("Do you run local freight inside Orlando?", "Yes. Along with regional lanes, we handle local freight moves and recurring routes inside the Orlando metro area.")],
             },
             "es": {
-                "title": "Grúa Pesada y Transporte de Carga en Orlando, FL | 24/7 | R&J Transport",
+                "title": "Grúa Pesada y Transporte de Carga en Orlando, FL | 24/7 | R&J Transport Service Inc.",
                 "desc": "Grúa pesada 24/7 en Orlando y transporte de carga local desde nuestro patio en 4980 Patch Rd desde 2004. Semis, autobuses, equipo. Llame al (407) 595-9726.",
                 "kicker": "Orlando, FL · Nuestra base desde 2004",
                 "h1": 'Grúa Pesada y Carga en <span class="red-text">Orlando</span>',
@@ -63,7 +63,7 @@ AREAS = [
         "schema_areas": ["Tampa, FL", "Hillsborough County, FL", "Pinellas County, FL", "Polk County, FL"],
         "content": {
             "en": {
-                "title": "Orlando to Tampa Freight Trucking & Heavy Towing | R&J Transport",
+                "title": "Orlando to Tampa Freight Trucking & Heavy Towing | R&J Transport Service Inc.",
                 "desc": "Freight lanes between Orlando and Tampa Bay on I-4, dedicated contract hauling and long-distance heavy towing. Orlando carrier since 2004. Call (407) 595-9726.",
                 "kicker": "Tampa Bay · I-4 corridor",
                 "h1": 'Freight &amp; Heavy Towing to <span class="red-text">Tampa Bay</span>',
@@ -82,7 +82,7 @@ AREAS = [
                          ("Can you tow a truck from Tampa back to Orlando?", "Yes. We handle long-distance heavy towing and transport between Tampa Bay and Central Florida.")],
             },
             "es": {
-                "title": "Transporte de Carga Orlando–Tampa y Grúa Pesada | R&J Transport",
+                "title": "Transporte de Carga Orlando–Tampa y Grúa Pesada | R&J Transport Service Inc.",
                 "desc": "Rutas de carga entre Orlando y Tampa Bay por la I-4, transporte dedicado por contrato y grúa pesada de larga distancia. Desde 2004. Llame al (407) 595-9726.",
                 "kicker": "Tampa Bay · Corredor I-4",
                 "h1": 'Carga y Grúa Pesada a <span class="red-text">Tampa Bay</span>',
@@ -112,7 +112,7 @@ AREAS = [
         "schema_areas": ["Miami, FL", "Miami-Dade County, FL", "Broward County, FL", "Palm Beach County, FL"],
         "content": {
             "en": {
-                "title": "Orlando to Miami Freight Trucking & Heavy Transport | R&J Transport",
+                "title": "Orlando to Miami Freight Trucking & Heavy Transport | R&J Transport Service Inc.",
                 "desc": "Recurring Orlando–Miami freight lanes via the Florida Turnpike and I-95. Miami-Dade, Broward, Palm Beach. Contract hauling and heavy transport since 2004.",
                 "kicker": "South Florida · Turnpike &amp; I-95",
                 "h1": 'Orlando to <span class="red-text">Miami</span> Freight &amp; Heavy Transport',
@@ -131,7 +131,7 @@ AREAS = [
                          ("Do you serve Port Everglades and PortMiami?", "We handle freight moving to and from South Florida's port and warehouse areas. Send your pickup and delivery details for a quote.")],
             },
             "es": {
-                "title": "Transporte de Carga Orlando–Miami y Traslado Pesado | R&J Transport",
+                "title": "Transporte de Carga Orlando–Miami y Traslado Pesado | R&J Transport Service Inc.",
                 "desc": "Rutas de carga recurrentes Orlando–Miami por el Florida Turnpike y la I-95. Miami-Dade, Broward, Palm Beach. Transporte por contrato y traslado pesado desde 2004.",
                 "kicker": "Sur de Florida · Turnpike y I-95",
                 "h1": 'Carga y Traslado Pesado de Orlando a <span class="red-text">Miami</span>',
@@ -161,7 +161,7 @@ AREAS = [
         "schema_areas": ["Jacksonville, FL", "Duval County, FL", "St. Johns County, FL", "Clay County, FL"],
         "content": {
             "en": {
-                "title": "Orlando to Jacksonville Freight Trucking & Heavy Towing | R&J Transport",
+                "title": "Orlando to Jacksonville Freight Trucking & Heavy Towing | R&J Transport Service Inc.",
                 "desc": "Freight lanes between Orlando and Jacksonville on I-95, JAXPORT-area hauling and long-distance heavy towing. Orlando carrier since 2004. Call (407) 595-9726.",
                 "kicker": "North Florida · I-95 &amp; I-10",
                 "h1": 'Freight &amp; Heavy Towing to <span class="red-text">Jacksonville</span>',
@@ -180,7 +180,7 @@ AREAS = [
                          ("Can you tow a semi from Jacksonville to Orlando?", "Yes. Call (407) 595-9726 with the truck's location and destination.")],
             },
             "es": {
-                "title": "Transporte de Carga Orlando–Jacksonville y Grúa Pesada | R&J Transport",
+                "title": "Transporte de Carga Orlando–Jacksonville y Grúa Pesada | R&J Transport Service Inc.",
                 "desc": "Rutas de carga entre Orlando y Jacksonville por la I-95, carga en el área de JAXPORT y grúa pesada de larga distancia. Desde 2004. Llame al (407) 595-9726.",
                 "kicker": "Norte de Florida · I-95 y I-10",
                 "h1": 'Carga y Grúa Pesada a <span class="red-text">Jacksonville</span>',
@@ -210,7 +210,7 @@ AREAS = [
         "schema_areas": ["Georgia", "Alabama", "South Carolina", "North Carolina", "Tennessee"],
         "content": {
             "en": {
-                "title": "Florida to Georgia, Alabama & Carolinas Freight Trucking | R&J Transport",
+                "title": "Florida to Georgia, Alabama & Carolinas Freight Trucking | R&J Transport Service Inc.",
                 "desc": "Out-of-state freight lanes from Orlando to Georgia, Alabama, the Carolinas and Tennessee via I-75 and I-95. Contract hauling and heavy transport since 2004.",
                 "kicker": "Out of state · I-75 &amp; I-95 northbound",
                 "h1": 'Florida to the <span class="red-text">Southeast</span> &amp; Beyond',
@@ -229,7 +229,7 @@ AREAS = [
                          ("Do you bring disabled trucks back to Florida?", "Yes. We handle long-distance heavy transport of trucks, buses and equipment between the Southeast and Florida.")],
             },
             "es": {
-                "title": "Transporte de Carga de Florida a Georgia, Alabama y las Carolinas | R&J Transport",
+                "title": "Transporte de Carga de Florida a Georgia, Alabama y las Carolinas | R&J Transport Service Inc.",
                 "desc": "Rutas de carga interestatales desde Orlando a Georgia, Alabama, las Carolinas y Tennessee por la I-75 y la I-95. Transporte por contrato y traslado pesado desde 2004.",
                 "kicker": "Fuera del estado · I-75 e I-95 al norte",
                 "h1": 'De Florida al <span class="red-text">Sureste</span> y Más Allá',
@@ -264,8 +264,8 @@ BLOG_POSTS = [
         "category": {"en": "Heavy towing", "es": "Grúa pesada"},
         "title": {"en": "Semi Truck Broke Down in Florida? What to Do in the First 30 Minutes",
                   "es": "¿Se le averió el camión en Florida? Qué hacer en los primeros 30 minutos"},
-        "seo_title": {"en": "Semi Truck Breakdown in Florida: What to Do First | R&J Transport",
-                      "es": "Camión Averiado en Florida: Qué Hacer Primero | R&J Transport"},
+        "seo_title": {"en": "Semi Truck Breakdown in Florida: What to Do First | R&J Transport Service Inc.",
+                      "es": "Camión Averiado en Florida: Qué Hacer Primero | R&J Transport Service Inc."},
         "excerpt": {"en": "A step-by-step checklist for drivers and fleet managers when a tractor-trailer goes down on I-4, the Turnpike or any Florida highway.",
                     "es": "Una lista paso a paso para choferes y gerentes de flota cuando un tractocamión se detiene en la I-4, el Turnpike o cualquier carretera de Florida."},
         "body": {
@@ -284,7 +284,7 @@ BLOG_POSTS = [
 <p>If freight is going to be late, the sooner the receiver knows, the better. Fleet managers should log the tow details, the destination shop and the expected timeline so the next decisions — repair, swap tractor, or transfer the load — happen quickly.</p>
 <h3>Set your fleet up before it happens</h3>
 <p>Companies running regular freight in Florida save time by setting up an account with a heavy towing provider ahead of time. Dispatch already has your billing, preferred shops and contact list on file, so the call is shorter and the truck rolls faster.</p>
-<p>R&amp;J Transport Service Inc has been towing heavy vehicles out of Orlando since 2004. Our dispatch line, <a href="tel:+14075959726">(407) 595-9726</a>, is answered 24 hours a day.</p>
+<p>R&amp;J Transport Service Inc. has been towing heavy vehicles out of Orlando since 2004. Our dispatch line, <a href="tel:+14075959726">(407) 595-9726</a>, is answered 24 hours a day.</p>
 """,
             "es": """
 <p>Un tractocamión cargado detenido en una carretera de Florida es primero un problema de seguridad y enseguida un problema de dinero. Lo que haga en la primera media hora decide qué tan rápido vuelve a moverse la unidad — y cuánto termina costando el retraso.</p>
@@ -301,7 +301,7 @@ BLOG_POSTS = [
 <p>Si la carga va a llegar tarde, mientras antes lo sepa el receptor, mejor. Los gerentes de flota deben registrar los datos del remolque, el taller de destino y el tiempo estimado para que las siguientes decisiones — reparar, cambiar de tractor o transferir la carga — se tomen rápido.</p>
 <h3>Registre su flota antes de que pase</h3>
 <p>Las empresas que mueven carga con frecuencia en Florida ahorran tiempo abriendo una cuenta con una empresa de grúa pesada por adelantado. El despacho ya tiene su facturación, talleres preferidos y contactos, así que la llamada es más corta y la grúa sale más rápido.</p>
-<p>R&amp;J Transport Service Inc remolca vehículos pesados desde Orlando desde 2004. Nuestra línea de despacho, <a href="tel:+14075959726">(407) 595-9726</a>, atiende las 24 horas.</p>
+<p>R&amp;J Transport Service Inc. remolca vehículos pesados desde Orlando desde 2004. Nuestra línea de despacho, <a href="tel:+14075959726">(407) 595-9726</a>, atiende las 24 horas.</p>
 """,
         },
     },
@@ -314,8 +314,8 @@ BLOG_POSTS = [
         "category": {"en": "Freight contracts", "es": "Contratos de carga"},
         "title": {"en": "Dedicated Freight Lanes vs. Spot Loads: What Florida Shippers Should Know",
                   "es": "Rutas de carga dedicadas vs. cargas spot: lo que deben saber las empresas en Florida"},
-        "seo_title": {"en": "Dedicated Freight vs Spot Loads for Florida Shippers | R&J Transport",
-                      "es": "Carga Dedicada vs Cargas Spot para Empresas en Florida | R&J Transport"},
+        "seo_title": {"en": "Dedicated Freight vs. Spot Loads for Florida Shippers | R&J Transport Service Inc.",
+                      "es": "Carga Dedicada vs Cargas Spot para Empresas en Florida | R&J Transport Service Inc."},
         "excerpt": {"en": "When does it make sense to lock in a dedicated carrier instead of buying trucks load by load? A practical guide for logistics and procurement teams.",
                     "es": "¿Cuándo conviene asegurar un transportista dedicado en lugar de comprar camiones carga por carga? Una guía práctica para equipos de logística y compras."},
         "body": {
@@ -331,7 +331,7 @@ BLOG_POSTS = [
 <p>Truly one-off shipments, unpredictable seasonal peaks and lanes you rarely use are good candidates for the spot market. Many companies run a hybrid: core recurring lanes on contract, overflow on spot.</p>
 <h3>Questions to ask a dedicated carrier</h3>
 <ul><li>Are you an asset-based carrier or a broker?</li><li>How long have you been operating, and from where?</li><li>Which lanes do you already run regularly?</li><li>Who do I call for status, and are they reachable after hours?</li><li>What happens if a truck breaks down on my load?</li></ul>
-<p>That last question matters. At R&amp;J Transport Service Inc we run heavy towing in-house, so a mechanical problem on a contract load doesn't turn into a search for a wrecker.</p>
+<p>That last question matters. At R&amp;J Transport Service Inc. we run heavy towing in-house, so a mechanical problem on a contract load doesn't turn into a search for a wrecker.</p>
 <h3>How to start</h3>
 <p>Pull a few months of shipment data, group it by lane and frequency, and share it with the carrier. A good carrier will come back with a rate and a realistic capacity commitment — not just a number. We have been running freight out of Orlando since 2004; <a href="/freight-trucking/#quote">send us your lanes</a> and we'll build a plan.</p>
 """,
@@ -347,7 +347,7 @@ BLOG_POSTS = [
 <p>Los envíos realmente únicos, los picos de temporada impredecibles y las rutas que casi no usa son buenos candidatos para el mercado spot. Muchas empresas usan un modelo mixto: rutas principales por contrato y el excedente en spot.</p>
 <h3>Preguntas para un transportista dedicado</h3>
 <ul><li>¿Tiene equipo propio o es un bróker?</li><li>¿Cuánto tiempo lleva operando y desde dónde?</li><li>¿Qué rutas ya cubre con regularidad?</li><li>¿A quién llamo para estatus y responde fuera de horario?</li><li>¿Qué pasa si un camión se avería con mi carga?</li></ul>
-<p>Esa última pregunta importa. En R&amp;J Transport Service Inc tenemos grúa pesada propia, así que un problema mecánico en una carga por contrato no se convierte en una búsqueda de grúa.</p>
+<p>Esa última pregunta importa. En R&amp;J Transport Service Inc. tenemos grúa pesada propia, así que un problema mecánico en una carga por contrato no se convierte en una búsqueda de grúa.</p>
 <h3>Cómo empezar</h3>
 <p>Reúna unos meses de datos de envíos, agrúpelos por ruta y frecuencia y compártalos con el transportista. Un buen transportista le responderá con una tarifa y un compromiso de capacidad realista — no solo un número. Movemos carga desde Orlando desde 2004; <a href="/es/transporte-de-carga/#quote">envíenos sus rutas</a> y armamos un plan.</p>
 """,
@@ -362,8 +362,8 @@ BLOG_POSTS = [
         "category": {"en": "Fleet management", "es": "Gestión de flotas"},
         "title": {"en": "How to Choose a Heavy Towing Company for Your Fleet",
                   "es": "Cómo elegir una empresa de grúa pesada para su flota"},
-        "seo_title": {"en": "How to Choose a Heavy Towing Company for Your Fleet | R&J Transport",
-                      "es": "Cómo Elegir una Empresa de Grúa Pesada para su Flota | R&J Transport"},
+        "seo_title": {"en": "How to Choose a Heavy Towing Company for Your Fleet | R&J Transport Service Inc.",
+                      "es": "Cómo Elegir una Empresa de Grúa Pesada para su Flota | R&J Transport Service Inc."},
         "excerpt": {"en": "Seven things fleet managers should check before a breakdown happens — from 24/7 dispatch to equipment, coverage area and track record.",
                     "es": "Siete cosas que un gerente de flota debe revisar antes de una avería — desde despacho 24/7 hasta equipo, cobertura y trayectoria."},
         "body": {
@@ -382,7 +382,7 @@ BLOG_POSTS = [
 <h3>6. Fleet accounts</h3>
 <p>A fleet account means dispatch already has your billing details, preferred repair shops and contacts. That turns a long phone call into a short one.</p>
 <h3>7. Bonus: freight capability</h3>
-<p>A towing company that also runs freight understands what a stopped load means for your customer. At R&amp;J Transport Service Inc we've done both out of Orlando since 2004.</p>
+<p>A towing company that also runs freight understands what a stopped load means for your customer. At R&amp;J Transport Service Inc. we've done both out of Orlando since 2004.</p>
 <p>Want to set up your fleet before you need us? Call <a href="tel:+14075959726">(407) 595-9726</a> or <a href="/heavy-towing/#quote">send a request</a>.</p>
 """,
             "es": """
@@ -400,7 +400,7 @@ BLOG_POSTS = [
 <h3>6. Cuentas de flota</h3>
 <p>Una cuenta de flota significa que el despacho ya tiene sus datos de facturación, talleres preferidos y contactos. Eso convierte una llamada larga en una corta.</p>
 <h3>7. Extra: capacidad de carga</h3>
-<p>Una empresa de grúas que también mueve carga entiende lo que significa una carga detenida para su cliente. En R&amp;J Transport Service Inc hacemos ambas cosas desde Orlando desde 2004.</p>
+<p>Una empresa de grúas que también mueve carga entiende lo que significa una carga detenida para su cliente. En R&amp;J Transport Service Inc. hacemos ambas cosas desde Orlando desde 2004.</p>
 <p>¿Quiere registrar su flota antes de necesitarnos? Llame al <a href="tel:+14075959726">(407) 595-9726</a> o <a href="/es/grua-pesada/#quote">envíe una solicitud</a>.</p>
 """,
         },
