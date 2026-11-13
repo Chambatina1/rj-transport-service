@@ -1,37 +1,36 @@
-# R & J Transport Service Inc — Website
+# R&J Transport Service Inc — Website
 
-Landing page for **R & J Transport Service Inc**, an intrastate trucking company based in Orlando, Florida.
+Bilingual (EN/ES) static website for **R&J Transport Service Inc** — heavy towing and freight trucking in Orlando, FL since 2004.
 
-- **Address:** 3803 Redditt Rd, Orlando, FL 32822
-- **Phone:** (407) 595-9726
-- **USDOT:** #1328058 · In business since 2018
-- **Service area:** Florida intrastate only — Orlando → Miami, Orlando → Tampa, statewide
+- **Address:** 4980 Patch Rd, Orlando, FL 32822
+- **Phone:** (407) 595-9726 · 24 hour service
+- **Email:** rjtransportusa@gmail.com · **USDOT:** 1328058
+- **Service area:** all of Florida, neighboring states (GA, AL) and further north (Carolinas, Tennessee)
 
-## What's inside
+## How the site is built
 
-| File | Purpose |
-|---|---|
-| `index.html` | The entire site (HTML + CSS + JS, no build step) |
-| `img/hero.jpg` | Hero background (semi truck at dusk, optimized) |
-| `img/freight.jpg` | "Why choose us" section photo |
-| `render.yaml` | One-click deploy config for Render |
-| `robots.txt` / `sitemap.xml` | SEO basics |
-
-## Run locally
+Every HTML page is **generated** by `tools/build.py` (Python 3, standard library only). Do not edit the HTML files by hand — edit the content and re-run the build:
 
 ```bash
-cd rj-transport-services
-python3 -m http.server 8000
-# open http://localhost:8000
+python3 tools/build.py      # regenerates all pages + sitemap.xml
+python3 -m http.server 8000 # preview at http://localhost:8000
 ```
 
-## Deploy on Render
+| Path | Purpose |
+|---|---|
+| `tools/build.py` | Business facts (NAP), page templates, home/towing/freight/contact pages, schema, sitemap |
+| `tools/content.py` | Service-area pages and blog posts (EN + ES) |
+| `assets/site.css`, `assets/site.js` | Shared styles and script (menu, quote form) |
+| `img/`, `media/` | Real company photos (fleet, wrecker, loads) and the home hero video collage (`media/hero-collage.mp4`/`.webm`, poster `img/hero-collage.*`). The video loads only on fast connections without reduced-motion. Neighbor signs are cropped/blurred. |
 
-1. Push this repo to GitHub.
-2. On [Render](https://render.com): **New → Blueprint**, pick this repo (the `render.yaml` is picked up automatically), or **New → Static Site** and set the publish directory to the repo root.
-3. Point the custom domain `rjtransportservicesinc.com` to the Render URL (Render provides the DNS records / CNAME).
+### Pages (each in English and Spanish, linked with hreflang)
+Home · Heavy Towing · Freight & Contracts · Service Areas (Orlando, Tampa, Miami, Jacksonville, Southeast) · Contact · Blog (3 posts)
 
-## Notes
+### Adding a blog post
+Add an entry to `BLOG_POSTS` in `tools/content.py` (both `en` and `es`), run the build, commit.
 
-- All facts on the site (name, address, phone, USDOT, routes, hours) come from the company. No testimonials or statistics were invented.
-- The two photos are web-sourced placeholders — for best results, replace `img/hero.jpg` and `img/freight.jpg` with photos of the company's own trucks (same filenames, no code changes needed).
+### Quote form
+Requests are sent through FormSubmit (`SITE["form_endpoint"]` in `tools/build.py`) to rjtransportusa@gmail.com. **One-time step:** after the site is live, submit the form once; FormSubmit emails an activation link to that inbox — click it. If the endpoint is emptied, the form falls back to SMS (mobile) or shows the request text (desktop).
+
+## Deploy (Render)
+`render.yaml` deploys the repo root as a static site. Custom domain: `www.rjtransportservicesinc.com` (see `CNAME`).
