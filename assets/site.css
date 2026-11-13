@@ -83,6 +83,7 @@ h3{font-size:clamp(22px,2.2vw,27px);line-height:1.05}
 .hero{position:relative;overflow:hidden;background:var(--ink);isolation:isolate}
 .hero-media{position:absolute;inset:0;z-index:-2}
 .hero-media img{width:100%;height:100%;object-fit:cover;object-position:62% 40%}
+.hero-media img.hero-wrecker{object-position:85% 45%}
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(12,14,17,.97) 0%,rgba(12,14,17,.88) 42%,rgba(12,14,17,.5) 75%,rgba(12,14,17,.35) 100%),linear-gradient(0deg,rgba(12,14,17,1) 0%,rgba(12,14,17,0) 40%)}
 .hero-inner{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:end;padding:92px 0 72px}
 .hero h1 .thin{display:block;font-weight:600;color:#cdd3da;font-size:.46em;letter-spacing:1px;margin-bottom:12px}
@@ -297,4 +298,11 @@ a.lane:hover .city{color:var(--red)}
   .logo svg{width:64px}
   .proof li{padding:20px 16px}
   .cta-band .phone-big{white-space:normal}
+}
+
+/* Real-photo hero (wrecker): photo sits on the right on wide screens */
+@media (min-width:961px){
+  .hero-media img.hero-wrecker{position:absolute;right:0;top:0;width:58%;height:100%;object-position:50% 55%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 30%);mask-image:linear-gradient(90deg,transparent 0,#000 30%)}
+  .hero:has(.hero-wrecker)::before{background:linear-gradient(90deg,rgba(12,14,17,1) 0%,rgba(12,14,17,.92) 40%,rgba(12,14,17,.25) 70%,rgba(12,14,17,.1) 100%),linear-gradient(0deg,rgba(12,14,17,.95) 0%,rgba(12,14,17,0) 30%)}
+  .hero:has(.hero-wrecker) .stamp{width:min(200px,100%);align-self:start}
 }

@@ -175,7 +175,7 @@ def business_schema(lang):
         "legalName": SITE["legal"],
         "url": SITE["domain"] + "/",
         "logo": SITE["domain"] + "/img/logo.png",
-        "image": [SITE["domain"] + "/img/orlando-yard.jpg", SITE["domain"] + "/img/hero.jpg"],
+        "image": [SITE["domain"] + "/img/yard-wrecker.jpg", SITE["domain"] + "/img/wrecker.jpg", SITE["domain"] + "/img/orlando-yard.jpg"],
         "telephone": "+1-407-595-9726",
         "email": SITE["email"],
         "priceRange": "$$",
@@ -347,16 +347,20 @@ def page_hero(lang, crumbs, kicker, h1, lede, img="hero", ctas=None):
     ) % (hero_img(img, eager=True), t("Breadcrumb", "Ruta de navegación"), crumb_html, kicker, h1, lede, ctas)
 
 
+HERO_SIZES = {"hero": (1920, 1280), "freight": (1400, 932), "wrecker": (1230, 1090)}
+
+
 def hero_img(name, eager=False):
-    return ('<picture><source type="image/webp" srcset="/img/%(n)s-sm.webp 900w, /img/%(n)s.webp 1920w" sizes="100vw">'
-            '<img src="/img/%(n)s.jpg" alt="" width="1920" height="1280" %(load)s></picture>') % {
-        "n": name, "load": 'fetchpriority="high" decoding="async"' if eager else 'loading="lazy" decoding="async"'}
+    w, h = HERO_SIZES[name]
+    return ('<picture><source type="image/webp" srcset="/img/%(n)s-sm.webp 900w, /img/%(n)s.webp %(w)dw" sizes="100vw">'
+            '<img class="hero-%(n)s" src="/img/%(n)s.jpg" alt="" width="%(w)d" height="%(h)d" %(load)s></picture>') % {
+        "n": name, "w": w, "h": h, "load": 'fetchpriority="high" decoding="async"' if eager else 'loading="lazy" decoding="async"'}
 
 
 # ---------------------------------------------------------------------------
 # Page shell
 # ---------------------------------------------------------------------------
-def shell(lang, key, title, desc, body, schemas=(), og_image="/img/hero.jpg", og_type="website"):
+def shell(lang, key, title, desc, body, schemas=(), og_image="/img/yard-wrecker.jpg", og_type="website"):
     path = url(key, lang)
     other = "es" if lang == "en" else "en"
     ui = UI[lang]
@@ -485,7 +489,7 @@ def page_home(lang):
     ])
     body = f"""
 <section class="hero">
-  <div class="hero-media">{hero_img('hero', eager=True)}</div>
+  <div class="hero-media">{hero_img('wrecker', eager=True)}</div>
   <div class="wrap"><div class="hero-inner">
     <div>
       <span class="kicker">{t('Orlando, Florida · Since 2004', 'Orlando, Florida · Desde 2004')}</span>
@@ -552,7 +556,7 @@ def page_home(lang):
 </div></section>
 
 <section class="section dark-alt"><div class="wrap split">
-  <figure class="split-media"><picture><source type="image/webp" srcset="/img/orlando-yard.webp"><img src="/img/orlando-yard.jpg" alt="{t('R&amp;J Transport Service Inc yard sign at 4980 Patch Rd, Orlando FL — Heavy Towing Service, 24 hour service', 'Letrero de R&amp;J Transport Service Inc en 4980 Patch Rd, Orlando FL — Grúa pesada, servicio 24 horas')}" width="1000" height="960" loading="lazy" decoding="async"></picture><figcaption>4980 Patch Rd · Orlando</figcaption></figure>
+  <figure class="split-media"><picture><source type="image/webp" srcset="/img/yard-wrecker.webp"><img src="/img/yard-wrecker.jpg" alt="{t('R&amp;J Transport Service Inc Kenworth heavy-duty wrecker at our yard, 4980 Patch Rd, Orlando FL', 'Grúa pesada Kenworth de R&amp;J Transport Service Inc en nuestro patio, 4980 Patch Rd, Orlando FL')}" width="1400" height="847" loading="lazy" decoding="async"></picture><figcaption>4980 Patch Rd · Orlando</figcaption></figure>
   <div>
     <span class="kicker">{t('Visit the yard', 'Visite el patio')}</span>
     <h2>{t('A real yard. A real crew.', 'Un patio real. Un equipo real.')}</h2>
@@ -601,6 +605,7 @@ def page_towing(lang):
                      t('Heavy Duty <span class="red-text">Towing</span> &amp; Recovery', 'Servicio de <span class="red-text">Grúa Pesada</span> y Rescate'),
                      t("Semis, tractor-trailers, buses, box trucks and heavy equipment. One call to (407) 595-9726 — day or night, every day of the year.",
                        "Semis, tractocamiones, autobuses, camiones caja y equipo pesado. Una llamada al (407) 595-9726 — de día o de noche, todos los días del año."),
+                     img="wrecker",
                      ctas=call_btn(lang, label=t("Call Now (407) 595-9726", "Llame Ya (407) 595-9726")) + quote_link(lang, mode="tow", label=t("Request a Tow", "Solicitar Grúa")))
     body += f"""
 <section class="section light"><div class="wrap">
@@ -807,7 +812,7 @@ def page_contact(lang):
     body += quote_section(lang, "freight", title=t("Send us your request", "Envíenos su solicitud"))
     body += f"""
 <section class="section dark-alt"><div class="wrap split">
-  <figure class="split-media"><picture><source type="image/webp" srcset="/img/orlando-yard.webp"><img src="/img/orlando-yard.jpg" alt="{t('Front of the R&amp;J Transport Service Inc yard at 4980 Patch Rd, Orlando', 'Frente del patio de R&amp;J Transport Service Inc en 4980 Patch Rd, Orlando')}" width="1000" height="960" loading="lazy" decoding="async"></picture><figcaption>4980 Patch Rd</figcaption></figure>
+  <figure class="split-media"><picture><source type="image/webp" srcset="/img/yard-wrecker.webp"><img src="/img/yard-wrecker.jpg" alt="{t('R&amp;J heavy-duty wrecker in front of our shop at 4980 Patch Rd, Orlando', 'Grúa pesada de R&amp;J frente a nuestro taller en 4980 Patch Rd, Orlando')}" width="1400" height="847" loading="lazy" decoding="async"></picture><figcaption>4980 Patch Rd</figcaption></figure>
   <div><span class="kicker">{t('Find us', 'Encuéntrenos')}</span><h2>{t('Southeast Orlando, near SR 528', 'Sureste de Orlando, cerca de la SR 528')}</h2>
   <div class="prose" style="margin-top:20px"><p>{t('Our yard is in the 32822 area of southeast Orlando, close to Orlando International Airport, SR 528 (Beachline), SR 417 and the Florida Turnpike.', 'Nuestro patio está en la zona 32822 del sureste de Orlando, cerca del Aeropuerto Internacional de Orlando, la SR 528 (Beachline), la SR 417 y el Florida Turnpike.')}</p></div>
   <div class="ctas" style="margin-top:24px"><a class="btn btn-red" href="{MAPS_URL}" target="_blank" rel="noopener">{ic('pin')}<span>{UI[lang]['directions']}</span></a></div></div>
