@@ -13,7 +13,7 @@ import shutil
 from datetime import date
 from html import escape
 
-from content import BLOG_POSTS, AREAS
+from content import BLOG_POSTS, AREAS, REVIEWS
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -38,6 +38,10 @@ SITE = {
     # FormSubmit forwards each request to the email below. The first submission
     # sends an activation email to that inbox; click "Activate" once.
     "form_endpoint": "https://formsubmit.co/ajax/rjtransportusa@gmail.com",
+    # Google Business Profile links. Replace with the profile's own "Reviews" and
+    # "Ask for reviews" share links when available (more reliable than a search).
+    "google_reviews_url": "https://www.google.com/maps/search/?api=1&query=R%26J+Transport+Service+Inc+4980+Patch+Rd+Orlando+FL+32822",
+    "google_write_review_url": "",
 }
 BUILD_DATE = date.today().isoformat()
 YEARS = date.today().year - SITE["founded"]
@@ -352,6 +356,34 @@ def gallery(lang):
     return "".join(out)
 
 
+def reviews_section(lang):
+    """Real customer reviews (tools/content.py REVIEWS) + links to Google reviews."""
+    t = (lambda en, es: en if lang == "en" else es)
+    read_url = SITE["google_reviews_url"]
+    write_url = SITE["google_write_review_url"] or read_url
+    star = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>'
+    cards = ""
+    for r in REVIEWS:
+        who = escape(r["name"]) + ((" · " + escape(r["company"])) if r.get("company") else "")
+        cards += ('<figure class="review"><div class="stars" aria-label="%d/5">%s</div><blockquote lang="%s">%s</blockquote>'
+                  '<figcaption><b>%s</b><span>%s · %s</span></figcaption></figure>') % (
+            r["stars"], star * int(r["stars"]), r.get("lang", "en"), escape(r["text"]), who, escape(r.get("source", "Google")),
+            fmt_date(r["date"], lang) if r.get("date") else "")
+    intro = (t("What customers say about us on Google.", "Lo que dicen nuestros clientes en Google.") if REVIEWS else
+             t("Our reputation was built one tow and one load at a time since 2004. Read what customers say on Google — and if we've worked for you, tell others.",
+               "Nuestra reputación se construyó remolque por remolque y carga por carga desde 2004. Lea lo que dicen los clientes en Google — y si ya trabajamos para usted, cuénteselo a otros."))
+    return (
+        '<section class="section dark-alt" id="reviews"><div class="wrap">'
+        '<div class="sec-head"><div><span class="kicker">%s</span><h2>%s</h2></div><p>%s</p></div>'
+        '%s<div class="ctas">'
+        '<a class="btn btn-red" href="%s" target="_blank" rel="noopener">%s</a>'
+        '<a class="btn btn-ghost" href="%s" target="_blank" rel="noopener">%s</a></div></div></section>'
+    ) % (t("Reviews", "Reseñas"), t("Customers who keep calling us back", "Clientes que nos vuelven a llamar"), intro,
+         ('<div class="reviews">%s</div>' % cards) if cards else "",
+         escape(read_url), t("Read our Google reviews", "Ver reseñas en Google"),
+         escape(write_url), t("Leave us a review", "Déjenos una reseña"))
+
+
 def page_hero(lang, crumbs, kicker, h1, lede, img="wrecker", ctas=None):
     t = (lambda en, es: en if lang == "en" else es)
     crumb_html = '<ol class="crumbs">' + "".join(
@@ -367,7 +399,7 @@ def page_hero(lang, crumbs, kicker, h1, lede, img="wrecker", ctas=None):
     ) % (hero_img(img, eager=True), t("Breadcrumb", "Ruta de navegación"), crumb_html, kicker, h1, lede, ctas)
 
 
-HERO_SIZES = {"wrecker": (1230, 1090), "hero-collage": (1296, 720), "cargo-crate": (1400, 932), "cargo-trees": (1400, 932),
+HERO_SIZES = {"wrecker": (1230, 1090), "hero-collage": (1920, 1080), "cargo-crate": (1400, 932), "cargo-trees": (1400, 932),
               "cargo-flatbed": (1400, 932), "cargo-truck-haul": (1400, 932), "fleet-kenworth": (1400, 932)}
 
 
@@ -510,7 +542,7 @@ def page_home(lang):
     ])
     body = f"""
 <section class="hero hero-collage">
-  <div class="hero-media">{hero_img('hero-collage', eager=True)}<video class="hero-video" muted loop playsinline preload="none" aria-hidden="true" data-src="/media/hero-collage.mp4"></video></div>
+  <div class="hero-media">{hero_img('hero-collage', eager=True)}<video class="hero-video" muted loop playsinline preload="none" aria-hidden="true" data-src="/media/hero-collage.mp4" data-src-hd="/media/hero-collage-1080.mp4" data-src-webm="/media/hero-collage-1080.webm"></video></div>
   <div class="wrap"><div class="hero-inner">
     <div>
       <span class="kicker">{t('Orlando, Florida · Since 2004', 'Orlando, Florida · Desde 2004')}</span>
@@ -591,6 +623,8 @@ def page_home(lang):
 </div></section>
 
 {cta_band(lang)}
+
+{reviews_section(lang)}
 
 <section class="section light" id="faq"><div class="wrap">
   <div class="sec-head single"><span class="kicker">FAQ</span><h2>{t('Straight answers', 'Respuestas directas')}</h2></div>

@@ -406,3 +406,13 @@ BLOG_POSTS = [
         },
     },
 ]
+
+# ---------------------------------------------------------------------------
+# Customer reviews — ONLY real reviews, copied word for word from Google (or
+# another public source) with the customer's name as shown there. Never edit
+# their meaning or invent reviews. Example entry:
+#   {"name": "John D.", "company": "", "stars": 5, "date": "2026-10-02",
+#    "text": "Fast response on I-4 at night...", "source": "Google", "lang": "en"}
+# Reviews show on both language versions in their original language.
+# ---------------------------------------------------------------------------
+REVIEWS = []
