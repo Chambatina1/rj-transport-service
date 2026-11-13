@@ -1,7 +1,199 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.rjtransportservicesinc.com/</loc>
-    <lastmod>2026-11-09</lastmod>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/es/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/heavy-towing/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/heavy-towing/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/grua-pesada/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/heavy-towing/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/es/grua-pesada/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/heavy-towing/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/grua-pesada/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/heavy-towing/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/freight-trucking/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/freight-trucking/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/transporte-de-carga/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/freight-trucking/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/es/transporte-de-carga/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/freight-trucking/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/transporte-de-carga/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/freight-trucking/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/service-areas/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/service-areas/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/areas-de-servicio/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/service-areas/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/es/areas-de-servicio/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/service-areas/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/areas-de-servicio/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/service-areas/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/service-areas/orlando-fl/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/service-areas/orlando-fl/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/areas-de-servicio/orlando-fl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/service-areas/orlando-fl/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/es/areas-de-servicio/orlando-fl/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/service-areas/orlando-fl/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/areas-de-servicio/orlando-fl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/service-areas/orlando-fl/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/service-areas/tampa-fl/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/service-areas/tampa-fl/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/areas-de-servicio/tampa-fl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/service-areas/tampa-fl/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/es/areas-de-servicio/tampa-fl/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/service-areas/tampa-fl/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/areas-de-servicio/tampa-fl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/service-areas/tampa-fl/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/service-areas/miami-south-florida/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/service-areas/miami-south-florida/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/areas-de-servicio/miami-sur-de-florida/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/service-areas/miami-south-florida/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/es/areas-de-servicio/miami-sur-de-florida/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/service-areas/miami-south-florida/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/areas-de-servicio/miami-sur-de-florida/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/service-areas/miami-south-florida/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/service-areas/jacksonville-fl/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/service-areas/jacksonville-fl/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/areas-de-servicio/jacksonville-fl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/service-areas/jacksonville-fl/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/es/areas-de-servicio/jacksonville-fl/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/service-areas/jacksonville-fl/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/areas-de-servicio/jacksonville-fl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/service-areas/jacksonville-fl/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/service-areas/southeast-us/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/service-areas/southeast-us/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/areas-de-servicio/sureste-eeuu/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/service-areas/southeast-us/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/es/areas-de-servicio/sureste-eeuu/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/service-areas/southeast-us/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/areas-de-servicio/sureste-eeuu/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/service-areas/southeast-us/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/contact/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/contact/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/contacto/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/contact/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/es/contacto/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/contact/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/contacto/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/contact/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/blog/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/blog/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/blog/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/blog/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/es/blog/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/blog/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/blog/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/blog/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/blog/semi-truck-breakdown-florida-what-to-do/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/blog/semi-truck-breakdown-florida-what-to-do/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/blog/camion-averiado-en-florida-que-hacer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/blog/semi-truck-breakdown-florida-what-to-do/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/es/blog/camion-averiado-en-florida-que-hacer/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/blog/semi-truck-breakdown-florida-what-to-do/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/blog/camion-averiado-en-florida-que-hacer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/blog/semi-truck-breakdown-florida-what-to-do/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/blog/dedicated-freight-vs-spot-loads-florida/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/blog/dedicated-freight-vs-spot-loads-florida/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/blog/carga-dedicada-vs-cargas-spot-florida/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/blog/dedicated-freight-vs-spot-loads-florida/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/es/blog/carga-dedicada-vs-cargas-spot-florida/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/blog/dedicated-freight-vs-spot-loads-florida/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/blog/carga-dedicada-vs-cargas-spot-florida/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/blog/dedicated-freight-vs-spot-loads-florida/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/blog/how-to-choose-heavy-towing-company/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/blog/how-to-choose-heavy-towing-company/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/blog/como-elegir-empresa-de-grua-pesada/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/blog/how-to-choose-heavy-towing-company/"/>
+  </url>
+  <url>
+    <loc>https://www.rjtransportservicesinc.com/es/blog/como-elegir-empresa-de-grua-pesada/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rjtransportservicesinc.com/blog/how-to-choose-heavy-towing-company/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.rjtransportservicesinc.com/es/blog/como-elegir-empresa-de-grua-pesada/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rjtransportservicesinc.com/blog/how-to-choose-heavy-towing-company/"/>
   </url>
 </urlset>
