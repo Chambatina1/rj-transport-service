@@ -44,7 +44,6 @@ SITE = {
     "google_write_review_url": "",
 }
 BUILD_DATE = date.today().isoformat()
-YEARS = date.today().year - SITE["founded"]
 MAPS_URL = "https://www.google.com/maps/search/?api=1&query=" + "4980+Patch+Rd+Orlando+FL+32822"
 
 # ---------------------------------------------------------------------------
@@ -123,7 +122,7 @@ def stamp_svg(lang):
             if lang == "en" else
             "R&amp;J TRANSPORT SERVICE INC &#8226; ORLANDO, FLORIDA &#8226; GR&#218;A PESADA &#8226; CARGA &#8226; ")
     top = "EST." if lang == "en" else "DESDE"
-    yrs = ("%d YEARS" % YEARS) if lang == "en" else ("%d A&#209;OS" % YEARS)
+    yrs = "ORLANDO &#8226; FL"
     return (
         '<svg viewBox="0 0 260 260" role="img" aria-label="%s">'
         '<defs><path id="rp" d="M130,130 m-104,0 a104,104 0 1,1 208,0 a104,104 0 1,1 -208,0"/></defs>'
@@ -549,7 +548,7 @@ def page_home(lang):
     <div>
       <span class="kicker">{t('Orlando, Florida · Since 2004', 'Orlando, Florida · Desde 2004')}</span>
       <h1><span class="thin">{t('Heavy towing &amp; freight trucking', 'Grúa pesada y transporte de carga')}</span>{t('Built to move <span class="red-text">heavy</span>. Built to last.', 'Hechos para mover lo <span class="red-text">pesado</span>. Hechos para durar.')}</h1>
-      <p class="lede">{t(f'For {YEARS} years, R&amp;J Transport Service Inc has moved freight for companies across Florida and the Southeast — and pulled heavy trucks back on the road, 24 hours a day.', f'Durante {YEARS} años, R&amp;J Transport Service Inc ha movido carga para empresas en Florida y el Sureste — y ha puesto camiones pesados de vuelta en la carretera, las 24 horas.')}</p>
+      <p class="lede">{t(f'Since 2004, R&amp;J Transport Service Inc has moved freight for companies across Florida and the Southeast — and pulled heavy trucks back on the road, 24 hours a day.', f'Desde 2004, R&amp;J Transport Service Inc ha movido carga para empresas en Florida y el Sureste — y ha puesto camiones pesados de vuelta en la carretera, las 24 horas.')}</p>
       <div class="ctas">{call_btn(lang)}{quote_link(lang, label=t('Get a Freight Quote', 'Cotizar un Flete'), mode='freight')}</div>
     </div>
     <div class="stamp">{stamp_svg(lang)}</div>
@@ -586,7 +585,7 @@ def page_home(lang):
 
 <section class="section" id="why"><div class="wrap">
   <div class="years">
-    <div class="big" aria-hidden="true">{YEARS}<small>{t('years on the road', 'años en la carretera')}</small></div>
+    <div class="big" aria-hidden="true">2004<small>{t('on the road since', 'en la carretera desde')}</small></div>
     <div>
       <span class="kicker">{t('Why companies stay with us', 'Por qué las empresas se quedan')}</span>
       <h2>{t('A carrier, not a broker.', 'Un transportista, no un intermediario.')}</h2>
