@@ -13,7 +13,7 @@ import shutil
 from datetime import date
 from html import escape
 
-from content import BLOG_POSTS, AREAS
+from content import BLOG_POSTS, AREAS, REVIEWS
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -38,9 +38,12 @@ SITE = {
     # FormSubmit forwards each request to the email below. The first submission
     # sends an activation email to that inbox; click "Activate" once.
     "form_endpoint": "https://formsubmit.co/ajax/rjtransportusa@gmail.com",
+    # Google Business Profile links. Replace with the profile's own "Reviews" and
+    # "Ask for reviews" share links when available (more reliable than a search).
+    "google_reviews_url": "https://www.google.com/maps/search/?api=1&query=R%26J+Transport+Service+Inc+4980+Patch+Rd+Orlando+FL+32822",
+    "google_write_review_url": "",
 }
 BUILD_DATE = date.today().isoformat()
-YEARS = date.today().year - SITE["founded"]
 MAPS_URL = "https://www.google.com/maps/search/?api=1&query=" + "4980+Patch+Rd+Orlando+FL+32822"
 
 # ---------------------------------------------------------------------------
@@ -119,7 +122,7 @@ def stamp_svg(lang):
             if lang == "en" else
             "R&amp;J TRANSPORT SERVICE INC &#8226; ORLANDO, FLORIDA &#8226; GR&#218;A PESADA &#8226; CARGA &#8226; ")
     top = "EST." if lang == "en" else "DESDE"
-    yrs = ("%d YEARS" % YEARS) if lang == "en" else ("%d A&#209;OS" % YEARS)
+    yrs = "ORLANDO &#8226; FL"
     return (
         '<svg viewBox="0 0 260 260" role="img" aria-label="%s">'
         '<defs><path id="rp" d="M130,130 m-104,0 a104,104 0 1,1 208,0 a104,104 0 1,1 -208,0"/></defs>'
@@ -352,6 +355,36 @@ def gallery(lang):
     return "".join(out)
 
 
+def reviews_section(lang):
+    """Real customer reviews only (tools/content.py REVIEWS). Renders nothing until real reviews exist."""
+    if not REVIEWS:
+        return ""
+    t = (lambda en, es: en if lang == "en" else es)
+    read_url = SITE["google_reviews_url"]
+    write_url = SITE["google_write_review_url"] or read_url
+    star = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>'
+    cards = ""
+    for r in REVIEWS:
+        who = escape(r["name"]) + ((" · " + escape(r["company"])) if r.get("company") else "")
+        cards += ('<figure class="review"><div class="stars" aria-label="%d/5">%s</div><blockquote lang="%s">%s</blockquote>'
+                  '<figcaption><b>%s</b><span>%s · %s</span></figcaption></figure>') % (
+            r["stars"], star * int(r["stars"]), r.get("lang", "en"), escape(r["text"]), who, escape(r.get("source", "Google")),
+            fmt_date(r["date"], lang) if r.get("date") else "")
+    intro = (t("What customers say about us on Google.", "Lo que dicen nuestros clientes en Google.") if REVIEWS else
+             t("Our reputation was built one tow and one load at a time since 2004. Read what customers say on Google — and if we've worked for you, tell others.",
+               "Nuestra reputación se construyó remolque por remolque y carga por carga desde 2004. Lea lo que dicen los clientes en Google — y si ya trabajamos para usted, cuénteselo a otros."))
+    return (
+        '<section class="section dark-alt" id="reviews"><div class="wrap">'
+        '<div class="sec-head"><div><span class="kicker">%s</span><h2>%s</h2></div><p>%s</p></div>'
+        '%s<div class="ctas">'
+        '<a class="btn btn-red" href="%s" target="_blank" rel="noopener">%s</a>'
+        '<a class="btn btn-ghost" href="%s" target="_blank" rel="noopener">%s</a></div></div></section>'
+    ) % (t("Reviews", "Reseñas"), t("Customers who keep calling us back", "Clientes que nos vuelven a llamar"), intro,
+         ('<div class="reviews">%s</div>' % cards) if cards else "",
+         escape(read_url), t("Read our Google reviews", "Ver reseñas en Google"),
+         escape(write_url), t("Leave us a review", "Déjenos una reseña"))
+
+
 def page_hero(lang, crumbs, kicker, h1, lede, img="wrecker", ctas=None):
     t = (lambda en, es: en if lang == "en" else es)
     crumb_html = '<ol class="crumbs">' + "".join(
@@ -367,7 +400,7 @@ def page_hero(lang, crumbs, kicker, h1, lede, img="wrecker", ctas=None):
     ) % (hero_img(img, eager=True), t("Breadcrumb", "Ruta de navegación"), crumb_html, kicker, h1, lede, ctas)
 
 
-HERO_SIZES = {"wrecker": (1230, 1090), "hero-collage": (1296, 720), "cargo-crate": (1400, 932), "cargo-trees": (1400, 932),
+HERO_SIZES = {"wrecker": (1230, 1090), "hero-collage": (1920, 1080), "cargo-crate": (1400, 932), "cargo-trees": (1400, 932),
               "cargo-flatbed": (1400, 932), "cargo-truck-haul": (1400, 932), "fleet-kenworth": (1400, 932)}
 
 
@@ -510,12 +543,12 @@ def page_home(lang):
     ])
     body = f"""
 <section class="hero hero-collage">
-  <div class="hero-media">{hero_img('hero-collage', eager=True)}<video class="hero-video" muted loop playsinline preload="none" aria-hidden="true" data-src="/media/hero-collage.mp4"></video></div>
+  <div class="hero-media">{hero_img('hero-collage', eager=True)}<video class="hero-video" muted loop playsinline preload="none" aria-hidden="true" data-src="/media/hero-collage.mp4" data-src-hd="/media/hero-collage-1080.mp4" data-src-webm="/media/hero-collage-1080.webm"></video></div>
   <div class="wrap"><div class="hero-inner">
     <div>
       <span class="kicker">{t('Orlando, Florida · Since 2004', 'Orlando, Florida · Desde 2004')}</span>
       <h1><span class="thin">{t('Heavy towing &amp; freight trucking', 'Grúa pesada y transporte de carga')}</span>{t('Built to move <span class="red-text">heavy</span>. Built to last.', 'Hechos para mover lo <span class="red-text">pesado</span>. Hechos para durar.')}</h1>
-      <p class="lede">{t(f'For {YEARS} years, R&amp;J Transport Service Inc has moved freight for companies across Florida and the Southeast — and pulled heavy trucks back on the road, 24 hours a day.', f'Durante {YEARS} años, R&amp;J Transport Service Inc ha movido carga para empresas en Florida y el Sureste — y ha puesto camiones pesados de vuelta en la carretera, las 24 horas.')}</p>
+      <p class="lede">{t(f'Since 2004, R&amp;J Transport Service Inc has moved freight for companies across Florida and the Southeast — and pulled heavy trucks back on the road, 24 hours a day.', f'Desde 2004, R&amp;J Transport Service Inc ha movido carga para empresas en Florida y el Sureste — y ha puesto camiones pesados de vuelta en la carretera, las 24 horas.')}</p>
       <div class="ctas">{call_btn(lang)}{quote_link(lang, label=t('Get a Freight Quote', 'Cotizar un Flete'), mode='freight')}</div>
     </div>
     <div class="stamp">{stamp_svg(lang)}</div>
@@ -552,7 +585,7 @@ def page_home(lang):
 
 <section class="section" id="why"><div class="wrap">
   <div class="years">
-    <div class="big" aria-hidden="true">{YEARS}<small>{t('years on the road', 'años en la carretera')}</small></div>
+    <div class="big" aria-hidden="true"><small>{t('On the road since', 'En la carretera desde')}</small>2004</div>
     <div>
       <span class="kicker">{t('Why companies stay with us', 'Por qué las empresas se quedan')}</span>
       <h2>{t('A carrier, not a broker.', 'Un transportista, no un intermediario.')}</h2>
@@ -591,6 +624,8 @@ def page_home(lang):
 </div></section>
 
 {cta_band(lang)}
+
+{reviews_section(lang)}
 
 <section class="section light" id="faq"><div class="wrap">
   <div class="sec-head single"><span class="kicker">FAQ</span><h2>{t('Straight answers', 'Respuestas directas')}</h2></div>
