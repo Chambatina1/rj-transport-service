@@ -258,7 +258,7 @@ BLOG_POSTS = [
     {
         "key": "breakdown",
         "date": "2026-11-13",
-        "img": "hero",
+        "img": "wrecker",
         "mode": "tow",
         "slug": {"en": "semi-truck-breakdown-florida-what-to-do", "es": "camion-averiado-en-florida-que-hacer"},
         "category": {"en": "Heavy towing", "es": "Grúa pesada"},
@@ -308,7 +308,7 @@ BLOG_POSTS = [
     {
         "key": "dedicated",
         "date": "2026-11-13",
-        "img": "freight",
+        "img": "cargo-flatbed",
         "mode": "freight",
         "slug": {"en": "dedicated-freight-vs-spot-loads-florida", "es": "carga-dedicada-vs-cargas-spot-florida"},
         "category": {"en": "Freight contracts", "es": "Contratos de carga"},
@@ -356,7 +356,7 @@ BLOG_POSTS = [
     {
         "key": "choose",
         "date": "2026-11-13",
-        "img": "hero",
+        "img": "wrecker",
         "mode": "tow",
         "slug": {"en": "how-to-choose-heavy-towing-company", "es": "como-elegir-empresa-de-grua-pesada"},
         "category": {"en": "Fleet management", "es": "Gestión de flotas"},

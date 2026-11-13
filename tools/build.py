@@ -332,7 +332,27 @@ def quote_section(lang, default_mode="freight", title=None, intro=None):
     }
 
 
-def page_hero(lang, crumbs, kicker, h1, lede, img="hero", ctas=None):
+GALLERY = [
+    ("cargo-crate", "Oversized wooden crate secured on a gooseneck flatbed trailer", "Caja de madera sobredimensionada asegurada en un tráiler cuello de ganso"),
+    ("cargo-flatbed", "Event and theme structures strapped on a flatbed trailer", "Estructuras para eventos amarradas en un tráiler de plataforma"),
+    ("cargo-trees", "Tall decorative structures hauled on a gooseneck trailer", "Estructuras decorativas altas en un tráiler cuello de ganso"),
+    ("cargo-truck-haul", "Semi tractor transported on a flatbed trailer", "Tractocamión transportado sobre un tráiler de plataforma"),
+    ("fleet-kenworth", "Kenworth tractor from the R&J fleet at the yard", "Tractocamión Kenworth de la flota de R&J en el patio"),
+    ("wrecker", "R&J Kenworth heavy-duty wrecker", "Grúa pesada Kenworth de R&J"),
+]
+
+
+def gallery(lang):
+    out = ['<div class="gallery">']
+    for n, en, es in GALLERY:
+        alt = en if lang == "en" else es
+        out.append('<figure><picture><source type="image/webp" srcset="/img/%s-sm.webp"><img src="/img/%s.jpg" alt="%s" loading="lazy" decoding="async" width="900" height="600"></picture><figcaption>%s</figcaption></figure>'
+                   % (n, n, escape(alt), escape(alt)))
+    out.append("</div>")
+    return "".join(out)
+
+
+def page_hero(lang, crumbs, kicker, h1, lede, img="wrecker", ctas=None):
     t = (lambda en, es: en if lang == "en" else es)
     crumb_html = '<ol class="crumbs">' + "".join(
         ('<li><a href="%s">%s</a></li>' % (p, escape(n))) if i < len(crumbs) - 1 else ('<li aria-current="page">%s</li>' % escape(n))
@@ -347,7 +367,8 @@ def page_hero(lang, crumbs, kicker, h1, lede, img="hero", ctas=None):
     ) % (hero_img(img, eager=True), t("Breadcrumb", "Ruta de navegación"), crumb_html, kicker, h1, lede, ctas)
 
 
-HERO_SIZES = {"hero": (1920, 1280), "freight": (1400, 932), "wrecker": (1230, 1090)}
+HERO_SIZES = {"wrecker": (1230, 1090), "hero-collage": (1296, 720), "cargo-crate": (1400, 932), "cargo-trees": (1400, 932),
+              "cargo-flatbed": (1400, 932), "cargo-truck-haul": (1400, 932), "fleet-kenworth": (1400, 932)}
 
 
 def hero_img(name, eager=False):
@@ -488,8 +509,8 @@ def page_home(lang):
         ("¿Cuánto tiempo llevan en el negocio?", "R&J Transport Service Inc opera desde Orlando desde 2004."),
     ])
     body = f"""
-<section class="hero">
-  <div class="hero-media">{hero_img('wrecker', eager=True)}</div>
+<section class="hero hero-collage">
+  <div class="hero-media">{hero_img('hero-collage', eager=True)}<video class="hero-video" muted loop playsinline preload="none" aria-hidden="true" data-src="/media/hero-collage.mp4"></video></div>
   <div class="wrap"><div class="hero-inner">
     <div>
       <span class="kicker">{t('Orlando, Florida · Since 2004', 'Orlando, Florida · Desde 2004')}</span>
@@ -682,7 +703,7 @@ def page_freight(lang):
                      t('Freight Capacity for <span class="red-text">Companies</span> That Ship at Scale', 'Capacidad de Carga para <span class="red-text">Empresas</span> que Mueven Volumen'),
                      t("Dedicated lanes, recurring schedules and project hauling from an Orlando carrier that has been running since 2004.",
                        "Rutas dedicadas, horarios recurrentes y transporte por proyecto con un transportista de Orlando que opera desde 2004."),
-                     img="freight", ctas='<a class="btn btn-red" href="#quote" data-mode="freight">%s</a>%s' % (t("Quote Your Lanes", "Cotizar sus Rutas"), call_btn(lang, cls="btn btn-ghost", label=SITE["phone_display"])))
+                     img="cargo-trees", ctas='<a class="btn btn-red" href="#quote" data-mode="freight">%s</a>%s' % (t("Quote Your Lanes", "Cotizar sus Rutas"), call_btn(lang, cls="btn btn-ghost", label=SITE["phone_display"])))
     body += f"""
 <section class="section light"><div class="wrap">
   <div class="sec-head"><div><span class="kicker">{t('What we haul', 'Qué transportamos')}</span><h2>{t('Freight we move every week', 'La carga que movemos cada semana')}</h2></div>
@@ -702,6 +723,11 @@ def page_freight(lang):
       ('calendar', 'Rutas dedicadas por contrato', 'Las mismas rutas, con el mismo horario y capacidad reservada para usted.'),
       ('route', 'Regional y hacia el norte', 'Toda Florida, el Sureste y rutas al norte por la I-75 y la I-95.'),
   ]))}
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="sec-head"><div><span class="kicker">{t('On the road', 'En la carretera')}</span><h2>{t('Real loads. Our trucks.', 'Cargas reales. Nuestros camiones.')}</h2></div>
+  <p>{t('Oversized crates, flatbed loads, event structures and equipment — moved by our own drivers and trailers.', 'Cajas sobredimensionadas, cargas en plataforma, estructuras para eventos y equipo — movidos por nuestros propios choferes y tráileres.')}</p></div>
+  {gallery(lang)}
 </div></section>
 
 <section class="section"><div class="wrap">
@@ -733,7 +759,7 @@ def page_freight(lang):
              "Transportista con equipo propio en Orlando desde 2004. Rutas dedicadas, contratos recurrentes, carga general, acero, drayage intermodal. Florida, Sureste y al norte. Cotice.")
     svc = service_schema(t("Freight Trucking & Contract Hauling", "Transporte de Carga por Contrato"), desc, url("freight", lang),
                          ["Florida", "Georgia", "Alabama", "South Carolina", "North Carolina", "Tennessee"], lang, "Freight trucking")
-    write(url("freight", lang), shell(lang, "freight", title, desc, body, [svc, breadcrumb_schema(crumbs), faq_schema(faqs)], og_image="/img/freight.jpg"))
+    write(url("freight", lang), shell(lang, "freight", title, desc, body, [svc, breadcrumb_schema(crumbs), faq_schema(faqs)], og_image="/img/cargo-trees.jpg"))
 
 
 def page_areas(lang):
@@ -746,7 +772,7 @@ def page_areas(lang):
     body = page_hero(lang, crumbs, t("Service areas", "Áreas de servicio"),
                      t('Florida, the <span class="red-text">Southeast</span> &amp; Beyond', 'Florida, el <span class="red-text">Sureste</span> y Más Allá'),
                      t("Based in Orlando since 2004. Heavy towing across Central Florida and long distance, freight lanes statewide, into neighboring states and further north.",
-                       "Con base en Orlando desde 2004. Grúa pesada en Florida Central y larga distancia, rutas de carga en todo el estado, estados vecinos y más al norte."))
+                       "Con base en Orlando desde 2004. Grúa pesada en Florida Central y larga distancia, rutas de carga en todo el estado, estados vecinos y más al norte."), img="fleet-kenworth")
     body += f"""
 <section class="section"><div class="wrap">
   <div class="features">{cards}</div>
@@ -771,7 +797,7 @@ def page_area(lang, a):
     crumbs = [(UI[lang]["home"], url("home", lang)), (t("Service Areas", "Áreas de Servicio"), url("areas", lang)), (a["name"][lang], url(key, lang))]
     c = a["content"][lang]
     others = "".join('<li><a href="%s">%s%s</a></li>' % (url("area-" + o["key"], lang), escape(o["name"][lang]), ic("arrow")) for o in AREAS if o["key"] != a["key"])
-    body = page_hero(lang, crumbs, c["kicker"], c["h1"], c["lede"])
+    body = page_hero(lang, crumbs, c["kicker"], c["h1"], c["lede"], img="cargo-truck-haul")
     body += f"""
 <section class="section light"><div class="wrap">
   <div class="divisions">
@@ -846,7 +872,7 @@ def page_blog(lang):
     body = page_hero(lang, crumbs, t("Blog · Towing &amp; freight know-how", "Blog · Guías de grúa y carga"),
                      t('From the <span class="red-text">Road</span>', 'Desde la <span class="red-text">Carretera</span>'),
                      t("Practical guides for fleet managers, shippers and drivers — from people who have been towing and hauling in Florida since 2004.",
-                       "Guías prácticas para gerentes de flota, embarcadores y choferes — de gente que remolca y transporta en Florida desde 2004."))
+                       "Guías prácticas para gerentes de flota, embarcadores y choferes — de gente que remolca y transporta en Florida desde 2004."), img="cargo-crate")
     body += '<section class="section"><div class="wrap"><div class="features">%s</div></div></section>' % cards
     body += cta_band(lang)
     title = t("Blog | Heavy Towing & Freight Trucking Guides | R&J Transport", "Blog | Guías de Grúa Pesada y Transporte de Carga | R&J Transport")
@@ -861,7 +887,7 @@ def page_post(lang, p):
     key = "post-" + p["key"]
     crumbs = [(UI[lang]["home"], url("home", lang)), ("Blog", url("blog", lang)), (p["title"][lang], url(key, lang))]
     meta = '%s · <time datetime="%s">%s</time> · %s' % (escape(p["category"][lang]), p["date"], fmt_date(p["date"], lang), t("By R&amp;J Transport dispatch team", "Por el equipo de despacho de R&amp;J Transport"))
-    body = page_hero(lang, crumbs, meta, escape(p["title"][lang]), escape(p["excerpt"][lang]), img=p.get("img", "hero"),
+    body = page_hero(lang, crumbs, meta, escape(p["title"][lang]), escape(p["excerpt"][lang]), img=p.get("img", "wrecker"),
                      ctas=call_btn(lang) + quote_link(lang, mode=p.get("mode", "freight")))
     related = "".join('<li><a href="%s">%s%s</a></li>' % (url("post-" + o["key"], lang), escape(o["title"][lang]), ic("arrow")) for o in BLOG_POSTS if o["key"] != p["key"])
     body += f"""
@@ -874,17 +900,17 @@ def page_post(lang, p):
 """
     art = {"@context": "https://schema.org", "@type": "BlogPosting", "headline": p["title"][lang], "description": p["excerpt"][lang],
            "datePublished": p["date"], "dateModified": p["date"], "inLanguage": lang, "mainEntityOfPage": abs_url(url(key, lang)),
-           "image": abs_url("/img/%s.jpg" % p.get("img", "hero")), "author": {"@type": "Organization", "name": SITE["name"], "url": SITE["domain"] + "/"},
+           "image": abs_url("/img/%s.jpg" % p.get("img", "wrecker")), "author": {"@type": "Organization", "name": SITE["name"], "url": SITE["domain"] + "/"},
            "publisher": {"@id": ORG_ID}}
     write(url(key, lang), shell(lang, key, p["seo_title"][lang], p["excerpt"][lang], body, [art, breadcrumb_schema(crumbs)],
-                                og_image="/img/%s.jpg" % p.get("img", "hero"), og_type="article"))
+                                og_image="/img/%s.jpg" % p.get("img", "wrecker"), og_type="article"))
 
 
 def page_404():
     body = """<section class="hero page-hero"><div class="hero-media">%s</div><div class="wrap"><div class="hero-inner"><div>
 <span class="kicker">404</span><h1>Wrong turn. <span class="red-text">We tow those too.</span></h1>
 <p class="lede">The page you are looking for isn’t here. / La página que busca no existe.</p>
-<div class="ctas"><a class="btn btn-red" href="/">Home</a><a class="btn btn-ghost" href="/es/">Inicio</a>%s</div></div></div></div></section>""" % (hero_img("hero", eager=True), call_btn("en", cls="btn btn-ghost", label=SITE["phone_display"]))
+<div class="ctas"><a class="btn btn-red" href="/">Home</a><a class="btn btn-ghost" href="/es/">Inicio</a>%s</div></div></div></div></section>""" % (hero_img("wrecker", eager=True), call_btn("en", cls="btn btn-ghost", label=SITE["phone_display"]))
     html = shell("en", "home", "Page not found | R&J Transport Service Inc", "Page not found.", body)
     html = html.replace('<link rel="canonical"', '<meta name="robots" content="noindex"><link rel="canonical"', 1)
     SITEMAP.pop()

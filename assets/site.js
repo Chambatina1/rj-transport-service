@@ -16,6 +16,21 @@
     });
   }
 
+  /* Hero video collage: load only when it helps (not on Save-Data, slow 2G/3G or reduced motion) */
+  var vid = document.querySelector(".hero-video");
+  if (vid) {
+    var c = navigator.connection || {};
+    var slow = c.saveData || /(^|-)2g|3g/.test(c.effectiveType || "");
+    var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!slow && !still) {
+      var src = vid.getAttribute("data-src");
+      if (!vid.canPlayType('video/mp4; codecs="avc1.4D401F"')) src = src.replace(/\.mp4$/, ".webm");
+      vid.src = src;
+      vid.addEventListener("playing", function () { vid.classList.add("playing"); });
+      var p = vid.play(); if (p && p.catch) p.catch(function () {});
+    }
+  }
+
   var form = document.getElementById("quote-form");
   if (!form) return;
   var es = form.getAttribute("data-lang") === "es";

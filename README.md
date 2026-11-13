@@ -21,7 +21,7 @@ python3 -m http.server 8000 # preview at http://localhost:8000
 | `tools/build.py` | Business facts (NAP), page templates, home/towing/freight/contact pages, schema, sitemap |
 | `tools/content.py` | Service-area pages and blog posts (EN + ES) |
 | `assets/site.css`, `assets/site.js` | Shared styles and script (menu, quote form) |
-| `img/` | Photos: `wrecker.*` and `yard-wrecker.*` are the company's own Kenworth wrecker at the yard (neighbor sign blurred), `orlando-yard.*` is the yard sign; `hero`/`freight` are stock placeholders still used on freight/blog pages |
+| `img/`, `media/` | Real company photos (fleet, wrecker, loads) and the home hero video collage (`media/hero-collage.mp4`/`.webm`, poster `img/hero-collage.*`). The video loads only on fast connections without reduced-motion. Neighbor signs are cropped/blurred. |
 
 ### Pages (each in English and Spanish, linked with hreflang)
 Home · Heavy Towing · Freight & Contracts · Service Areas (Orlando, Tampa, Miami, Jacksonville, Southeast) · Contact · Blog (3 posts)
