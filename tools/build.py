@@ -32,9 +32,12 @@ SITE = {
     "zip": "32822",
     "founded": 2004,
     "usdot": "1328058",
+    "email": "rjtransportusa@gmail.com",
     # Paste a Formspree (or similar) endpoint here to receive quote requests by
     # email, e.g. "https://formspree.io/f/abcdwxyz". Empty = SMS/call fallback.
-    "form_endpoint": "",
+    # FormSubmit forwards each request to the email below. The first submission
+    # sends an activation email to that inbox; click "Activate" once.
+    "form_endpoint": "https://formsubmit.co/ajax/rjtransportusa@gmail.com",
 }
 BUILD_DATE = date.today().isoformat()
 YEARS = date.today().year - SITE["founded"]
@@ -174,6 +177,7 @@ def business_schema(lang):
         "logo": SITE["domain"] + "/img/logo.png",
         "image": [SITE["domain"] + "/img/orlando-yard.jpg", SITE["domain"] + "/img/hero.jpg"],
         "telephone": "+1-407-595-9726",
+        "email": SITE["email"],
         "priceRange": "$$",
         "foundingDate": str(SITE["founded"]),
         "description": ("Heavy towing and freight trucking company in Orlando, FL since 2004. 24-hour heavy-duty towing and contract freight hauling across Florida, the Southeast and beyond."
@@ -281,11 +285,13 @@ def quote_section(lang, default_mode="freight", title=None, intro=None):
         '<div>%s<p><b>%s</b><a href="tel:%s">%s</a></p></div>'
         '<div>%s<p><b>%s</b><a href="%s" target="_blank" rel="noopener">%s<br>%s, %s %s</a></p></div>'
         '<div>%s<p><b>%s</b><span>%s</span></p></div>'
+        '<div>%s<p><b>Email</b><a href="mailto:%s">%s</a></p></div>'
         '<div>%s<p><b>USDOT</b><span>#%s</span></p></div>'
         '</div>'
     ) % (ic("phone"), t("Phone · 24/7", "Teléfono · 24/7"), SITE["phone_e164"], SITE["phone_display"],
          ic("pin"), t("Yard & office", "Patio y oficina"), MAPS_URL, SITE["street"], SITE["city"], SITE["region"], SITE["zip"],
          ic("clock"), t("Hours", "Horario"), UI[lang]["hours"],
+         ic("mail"), SITE["email"], SITE["email"],
          ic("shield"), SITE["usdot"])
     return (
         '<section class="section" id="quote"><div class="wrap quote">'
@@ -419,7 +425,7 @@ def shell(lang, key, title, desc, body, schemas=(), og_image="/img/hero.jpg", og
       <div><h2>{ui['foot_areas']}</h2><ul>{foot_areas}</ul></div>
       <div><h2>{ui['foot_contact']}</h2>
         <address><strong style="color:#fff">{SITE['legal']}</strong><br>{SITE['street']}<br>{SITE['city']}, {SITE['region']} {SITE['zip']}<br>
-        <a href="tel:{SITE['phone_e164']}" style="color:#fff;font-weight:700">{SITE['phone_display']}</a><br>{ui['hours']}<br>USDOT #{SITE['usdot']}<br>
+        <a href="tel:{SITE['phone_e164']}" style="color:#fff;font-weight:700">{SITE['phone_display']}</a><br><a href="mailto:{SITE['email']}">{SITE['email']}</a><br>{ui['hours']}<br>USDOT #{SITE['usdot']}<br>
         <a href="{MAPS_URL}" target="_blank" rel="noopener">{ui['directions']} &rarr;</a></address>
       </div>
     </div>

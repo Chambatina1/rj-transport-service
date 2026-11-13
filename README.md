@@ -4,6 +4,7 @@ Bilingual (EN/ES) static website for **R&J Transport Service Inc** — heavy tow
 
 - **Address:** 4980 Patch Rd, Orlando, FL 32822
 - **Phone:** (407) 595-9726 · 24 hour service
+- **Email:** rjtransportusa@gmail.com · **USDOT:** 1328058
 - **Service area:** all of Florida, neighboring states (GA, AL) and further north (Carolinas, Tennessee)
 
 ## How the site is built
@@ -29,7 +30,7 @@ Home · Heavy Towing · Freight & Contracts · Service Areas (Orlando, Tampa, Mi
 Add an entry to `BLOG_POSTS` in `tools/content.py` (both `en` and `es`), run the build, commit.
 
 ### Quote form
-Set `SITE["form_endpoint"]` in `tools/build.py` to a form service URL (e.g. a free Formspree form, which emails each request) and rebuild. Until then the form opens an SMS to the company phone on mobile and shows the request text on desktop.
+Requests are sent through FormSubmit (`SITE["form_endpoint"]` in `tools/build.py`) to rjtransportusa@gmail.com. **One-time step:** after the site is live, submit the form once; FormSubmit emails an activation link to that inbox — click it. If the endpoint is emptied, the form falls back to SMS (mobile) or shows the request text (desktop).
 
 ## Deploy (Render)
 `render.yaml` deploys the repo root as a static site. Custom domain: `www.rjtransportservicesinc.com` (see `CNAME`).

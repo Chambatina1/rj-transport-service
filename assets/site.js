@@ -21,14 +21,14 @@
   var es = form.getAttribute("data-lang") === "es";
   var T = es ? {
     sending: "Enviando…", ok: "¡Gracias! Recibimos su solicitud. Un despachador le contactará pronto.",
-    err: "No pudimos enviar el formulario. Llámenos al (407) 595-9726.",
+    err: "No pudimos enviar el formulario. Llámenos al (407) 595-9726 o escriba a rjtransportusa@gmail.com.",
     req: "Por favor complete nombre y teléfono.",
     sms: "Abriendo su app de mensajes con la solicitud lista para enviar…",
     desk: "Llámenos al (407) 595-9726 o envíe este mensaje por texto a ese número:\n\n",
     head: "Solicitud de cotización - R&J Transport", tow: "Grúa", freight: "Carga"
   } : {
     sending: "Sending…", ok: "Thank you! We received your request. A dispatcher will contact you shortly.",
-    err: "We couldn't send the form. Please call (407) 595-9726.",
+    err: "We couldn't send the form. Please call (407) 595-9726 or email rjtransportusa@gmail.com.",
     req: "Please fill in your name and phone.",
     sms: "Opening your messaging app with the request ready to send…",
     desk: "Call us at (407) 595-9726, or text this message to that number:\n\n",
@@ -71,6 +71,9 @@
       if (v) lines.push(k.replace("_", " ") + ": " + v);
     });
     var text = lines.join("\n");
+    payload._subject = T.head + " (" + payload.service + ")";
+    payload._template = "table";
+    payload._captcha = "false";
     var endpoint = form.getAttribute("data-endpoint");
     var btn = form.querySelector('button[type="submit"]');
 
