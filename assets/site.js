@@ -24,7 +24,7 @@
     var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!slow && !still) {
       /* 1080p on large/hi-dpi screens, 720p elsewhere; WebM only if H.264 is unsupported */
-      var big = Math.max(window.innerWidth, window.innerHeight) * (window.devicePixelRatio || 1) >= 1500 && window.innerWidth >= 900;
+      var big = Math.max(window.innerWidth, window.innerHeight) * (window.devicePixelRatio || 1) >= 1300 && window.innerWidth >= 900;
       var src = big ? vid.getAttribute("data-src-hd") : vid.getAttribute("data-src");
       if (!vid.canPlayType('video/mp4; codecs="avc1.4D401F"')) src = vid.getAttribute("data-src-webm");
       vid.src = src;
