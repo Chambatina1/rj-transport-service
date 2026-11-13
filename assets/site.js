@@ -43,7 +43,7 @@
     sms: "Abriendo su app de mensajes con la solicitud lista para enviar…",
     desk: "Llámenos al (407) 595-9726 o envíe este mensaje por texto a ese número:\n\n",
     head: "Solicitud de cotización - R&J Transport", tow: "Grúa", freight: "Carga",
-    dep: "\n\nSiguiente paso: envíe el depósito por Zelle al (407) 595-9726 (R&J Transport Service Inc.). El despachador le llamará para confirmar el monto; la grúa sale cuando recibimos el depósito."
+    dep: "\n\nSiguiente paso: envíe el depósito de $100 por Zelle al (407) 595-9726 (R&J Transport Service Inc.). La grúa sale cuando recibimos el depósito."
   } : {
     sending: "Sending…", ok: "Thank you! We received your request. A dispatcher will contact you shortly.",
     err: "We couldn't send the form. Please call (407) 595-9726 or email rjtransportusa@gmail.com.",
@@ -51,7 +51,7 @@
     sms: "Opening your messaging app with the request ready to send…",
     desk: "Call us at (407) 595-9726, or text this message to that number:\n\n",
     head: "Quote request - R&J Transport", tow: "Towing", freight: "Freight",
-    dep: "\n\nNext step: send the Zelle deposit to (407) 595-9726 (R&J Transport Service Inc.). The dispatcher will call to confirm the amount; the tow truck rolls once the deposit is received."
+    dep: "\n\nNext step: send the $100 Zelle deposit to (407) 595-9726 (R&J Transport Service Inc.). The tow truck rolls once the deposit is received."
   };
 
   /* Towing / freight toggle */
