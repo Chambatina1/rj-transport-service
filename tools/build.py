@@ -357,7 +357,9 @@ def gallery(lang):
 
 
 def reviews_section(lang):
-    """Real customer reviews (tools/content.py REVIEWS) + links to Google reviews."""
+    """Real customer reviews only (tools/content.py REVIEWS). Renders nothing until real reviews exist."""
+    if not REVIEWS:
+        return ""
     t = (lambda en, es: en if lang == "en" else es)
     read_url = SITE["google_reviews_url"]
     write_url = SITE["google_write_review_url"] or read_url
