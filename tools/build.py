@@ -10,6 +10,7 @@ The hosting (Render static site) serves the generated files as-is.
 import json
 import os
 import shutil
+import hashlib
 from datetime import date
 from html import escape
 
@@ -44,6 +45,11 @@ SITE = {
     "google_write_review_url": "",
 }
 BUILD_DATE = date.today().isoformat()
+_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+def _ver(path):
+    with open(os.path.join(_ROOT, path), "rb") as f:
+        return hashlib.sha1(f.read()).hexdigest()[:10]
+CSS_V, JS_V = _ver("assets/site.css"), _ver("assets/site.js")
 MAPS_URL = "https://www.google.com/maps/search/?api=1&query=" + "4980+Patch+Rd+Orlando+FL+32822"
 
 # ---------------------------------------------------------------------------
@@ -313,7 +319,8 @@ def quote_section(lang, default_mode="freight", title=None, intro=None):
         '<div class="row2"><div class="field"><label for="f-type">%(l_type)s</label><select id="f-type" name="freight_type">%(o_types)s</select></div>'
         '<div class="field"><label for="f-freq">%(l_freq)s</label><select id="f-freq" name="frequency">%(o_freq)s</select></div></div></div>'
         '<div class="only-tow"><div class="row2"><div class="field"><label for="f-loc">%(l_loc)s</label><input id="f-loc" name="location"></div>'
-        '<div class="field"><label for="f-veh">%(l_veh)s</label><select id="f-veh" name="vehicle">%(o_veh)s</select></div></div></div>'
+        '<div class="field"><label for="f-veh">%(l_veh)s</label><select id="f-veh" name="vehicle">%(o_veh)s</select></div></div>'
+        '<p class="deposit-note"><b>%(dep_h)s</b> %(dep)s</p></div>'
         '<div class="field"><label for="f-msg">%(l_msg)s</label><textarea id="f-msg" name="message"></textarea></div>'
         '<input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">'
         '<button class="btn btn-red btn-block" type="submit">%(submit)s</button>'
@@ -332,6 +339,9 @@ def quote_section(lang, default_mode="freight", title=None, intro=None):
         "l_msg": t("Details", "Detalles"), "submit": t("Send request", "Enviar solicitud"),
         "note": t("Urgent tow? Don't wait for email — call", "¿Grúa urgente? No espere el correo — llame al"),
         "tel": SITE["phone_e164"], "phone": SITE["phone_display"],
+        "dep_h": t("$100 Zelle deposit required.", "Se requiere depósito de $100 por Zelle."),
+        "dep": t("To confirm a tow, we ask for a $100 deposit by Zelle to (407) 595-9726 (R&amp;J Transport Service Inc.) before the truck rolls. It guarantees the job, so our wrecker never goes out for nothing. The deposit is applied to your final bill and may be refundable in some cases.",
+                 "Para confirmar el servicio de grúa, pedimos un depósito de $100 por Zelle al (407) 595-9726 (R&amp;J Transport Service Inc.) antes de enviar la grúa. Es una garantía de que el trabajo se hará, para que la grúa no salga en vano. El depósito se descuenta del total del servicio y puede ser reembolsable en algunos casos."),
     }
 
 
@@ -453,7 +463,7 @@ def shell(lang, key, title, desc, body, schemas=(), og_image="/img/yard-wrecker.
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;600;700&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v={BUILD_DATE}">
+<link rel="stylesheet" href="/assets/site.css?v={CSS_V}">
 {schema_html}
 </head>
 <body>
@@ -491,7 +501,7 @@ def shell(lang, key, title, desc, body, schemas=(), og_image="/img/yard-wrecker.
   </div>
 </footer>
 <div class="callbar"><a class="call" href="tel:{SITE['phone_e164']}">{ic('phone')}{ui['call']}</a><a href="{url('contact', lang)}#quote">{ui['text_us']}</a></div>
-<script src="/assets/site.js?v={BUILD_DATE}" defer></script>
+<script src="/assets/site.js?v={JS_V}" defer></script>
 </body>
 </html>
 """
@@ -650,12 +660,14 @@ def page_towing(lang):
         ("Can you tow a loaded trailer?", "In many cases, yes. Tell the dispatcher the load type and approximate weight so we send the right equipment. If the load needs to be transferred, we can help coordinate that too."),
         ("Do you tow long distance?", "Yes. Besides Central Florida, we handle long-distance heavy towing and transport across Florida and into neighboring states."),
         ("Do you work with fleets and insurance companies?", "Yes. We work with fleet managers, leasing companies and insurers. Call to set up your fleet so dispatch has your information on file."),
+        ("Do you require a deposit for towing?", "Yes. To confirm a tow, we ask for a $100 deposit by Zelle to (407) 595-9726 (R&J Transport Service Inc.) before the truck is dispatched. It guarantees the job, so the wrecker doesn't make the trip for nothing. The deposit is applied to your final bill and may be refundable in some cases."),
     ], [
         ("¿Qué se considera grúa pesada?", "La grúa pesada cubre vehículos demasiado grandes o pesados para una grúa estándar — normalmente camiones Clase 7 y 8 como tractocamiones, volteos, autobuses, casas rodantes grandes y equipo de construcción."),
         ("¿Qué tan rápido llegan en Orlando?", "El tiempo depende de su ubicación, el tráfico y el trabajo. Llame al (407) 595-9726 con su ubicación y le daremos un tiempo de llegada honesto antes de salir."),
         ("¿Pueden remolcar un tráiler cargado?", "En muchos casos, sí. Dígale al despachador el tipo de carga y el peso aproximado para enviar el equipo correcto. Si hay que transferir la carga, también ayudamos a coordinarlo."),
         ("¿Hacen remolques de larga distancia?", "Sí. Además de Florida Central, hacemos remolque pesado y traslado de larga distancia en toda Florida y estados vecinos."),
         ("¿Trabajan con flotas y aseguradoras?", "Sí. Trabajamos con gerentes de flota, arrendadoras y aseguradoras. Llame para registrar su flota y que despacho tenga su información."),
+        ("¿Piden depósito para el servicio de grúa?", "Sí. Para confirmar el servicio, pedimos un depósito de $100 por Zelle al (407) 595-9726 (R&J Transport Service Inc.) antes de enviar la grúa. Es una garantía de que el trabajo se hará, para que la grúa no haga el viaje en vano. El depósito se descuenta del total del servicio y puede ser reembolsable en algunos casos."),
     ])
     body = page_hero(lang, crumbs, t("24-hour heavy towing · Orlando, FL", "Grúa pesada 24 horas · Orlando, FL"),
                      t('Heavy Duty <span class="red-text">Towing</span> &amp; Recovery', 'Servicio de <span class="red-text">Grúa Pesada</span> y Rescate'),

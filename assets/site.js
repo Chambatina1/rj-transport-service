@@ -42,14 +42,16 @@
     req: "Por favor complete nombre y teléfono.",
     sms: "Abriendo su app de mensajes con la solicitud lista para enviar…",
     desk: "Llámenos al (407) 595-9726 o envíe este mensaje por texto a ese número:\n\n",
-    head: "Solicitud de cotización - R&J Transport", tow: "Grúa", freight: "Carga"
+    head: "Solicitud de cotización - R&J Transport", tow: "Grúa", freight: "Carga",
+    dep: "\n\nSiguiente paso: envíe el depósito de $100 por Zelle al (407) 595-9726 (R&J Transport Service Inc.). La grúa sale cuando recibimos el depósito."
   } : {
     sending: "Sending…", ok: "Thank you! We received your request. A dispatcher will contact you shortly.",
     err: "We couldn't send the form. Please call (407) 595-9726 or email rjtransportusa@gmail.com.",
     req: "Please fill in your name and phone.",
     sms: "Opening your messaging app with the request ready to send…",
     desk: "Call us at (407) 595-9726, or text this message to that number:\n\n",
-    head: "Quote request - R&J Transport", tow: "Towing", freight: "Freight"
+    head: "Quote request - R&J Transport", tow: "Towing", freight: "Freight",
+    dep: "\n\nNext step: send the $100 Zelle deposit to (407) 595-9726 (R&J Transport Service Inc.). The tow truck rolls once the deposit is received."
   };
 
   /* Towing / freight toggle */
@@ -97,7 +99,12 @@
     if (endpoint) {
       btn.disabled = true; show(T.sending);
       fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(payload) })
-        .then(function (r) { if (!r.ok) throw new Error(r.status); show(T.ok, true); form.reset(); setMode(mode); })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function (j) {
+          /* FormSubmit answers HTTP 200 with success "false" while the inbox is not activated: treat that as a failure */
+          if (!j || String(j.success) !== "true") throw new Error((j && j.message) || "not sent");
+          show(T.ok + (mode === "tow" ? T.dep : ""), true); form.reset(); setMode(mode);
+        })
         .catch(function () { show(T.err); })
         .then(function () { btn.disabled = false; });
       return;
