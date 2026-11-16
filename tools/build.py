@@ -10,11 +10,12 @@ The hosting (Render static site) serves the generated files as-is.
 import json
 import os
 import shutil
+import re
 import hashlib
 from datetime import date
 from html import escape
 
-from content import BLOG_POSTS, AREAS, REVIEWS
+from content import BLOG_POSTS, AREAS, REVIEWS, SERVICES
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -66,6 +67,8 @@ ROUTES = {
 for a in AREAS:
     ROUTES["area-" + a["key"]] = {"en": "/service-areas/%s/" % a["slug"]["en"],
                                   "es": "/es/areas-de-servicio/%s/" % a["slug"]["es"]}
+for sv in SERVICES:
+    ROUTES["svc-" + sv["key"]] = {"en": "/%s/" % sv["slug"]["en"], "es": "/es/%s/" % sv["slug"]["es"]}
 for p in BLOG_POSTS:
     ROUTES["post-" + p["key"]] = {"en": "/blog/%s/" % p["slug"]["en"],
                                   "es": "/es/blog/%s/" % p["slug"]["es"]}
@@ -435,6 +438,7 @@ def shell(lang, key, title, desc, body, schemas=(), og_image="/img/yard-wrecker.
     mobile_items += '<a href="%s" hreflang="%s" lang="%s">%s</a>' % (url(key, other), other, other, "English" if other == "en" else "Español")
     schema_html = "".join('<script type="application/ld+json">%s</script>' % json.dumps(s, ensure_ascii=False, separators=(",", ":")) for s in [business_schema(lang)] + list(schemas))
     foot_services = "".join('<li><a href="%s">%s</a></li>' % (url(k, lang), escape(l)) for k, l in ui["nav"][:2])
+    foot_services += "".join('<li><a href="%s">%s</a></li>' % (url("svc-" + sv["key"], lang), escape(sv["nav"][lang])) for sv in SERVICES)
     foot_services += '<li><a href="%s">%s</a></li>' % (url("blog", lang), "Blog")
     foot_areas = "".join('<li><a href="%s">%s</a></li>' % (url("area-" + a["key"], lang), escape(a["name"][lang])) for a in AREAS)
     SITEMAP.append(key)
@@ -645,7 +649,7 @@ def page_home(lang):
 {quote_section(lang, 'freight')}
 """
     title = t("Heavy Towing & Freight Trucking in Orlando, FL | Since 2004 | R&J Transport Service Inc.",
-              "Grúa Pesada y Transporte de Carga en Orlando, FL | Desde 2004 | R&J Transport Service Inc.")
+              "Servicio de Grúa Pesada y Transporte de Carga en Orlando, FL | Desde 2004 | R&J Transport Service Inc.")
     desc = t("24-hour heavy towing and contract freight trucking from Orlando, FL since 2004. Serving all of Florida, the Southeast and beyond. Call (407) 595-9726.",
              "Grúa pesada 24 horas y transporte de carga por contrato desde Orlando, FL desde 2004. Toda Florida, el Sureste y más allá. Llame al (407) 595-9726.")
     write(url("home", lang), shell(lang, "home", title, desc, body, [faq_schema(faqs)]))
@@ -719,10 +723,11 @@ def page_towing(lang):
   <div class="sec-head single"><span class="kicker">FAQ</span><h2>{t('Heavy towing questions', 'Preguntas sobre grúa pesada')}</h2></div>
   {faq_block(faqs)}
 </div></section>
+{related_services(lang, 'towing')}
 {quote_section(lang, 'tow', title=t('Request a tow or set up your fleet', 'Solicite una grúa o registre su flota'))}
 """
     title = t("24-Hour Heavy-Duty Towing in Orlando, FL | Semi & Truck Towing | R&J Transport Service Inc.",
-              "Grúa Pesada 24 Horas en Orlando, FL | Remolque de Camiones y Semis | R&J Transport Service Inc.")
+              "Servicio de Grúa Pesada 24 Horas en Orlando, FL | Remolque de Camiones y Semis | R&J Transport Service Inc.")
     desc = t("24/7 heavy-duty towing in Orlando: semi-trucks, tractor-trailers, buses, box trucks and heavy equipment. Accident recovery and long-distance tows. Call (407) 595-9726.",
              "Grúa pesada 24/7 en Orlando: semis, tractocamiones, autobuses, camiones caja y equipo pesado. Rescate en accidentes y larga distancia. Llame al (407) 595-9726.")
     svc = service_schema(t("Heavy Duty Towing & Recovery", "Grúa Pesada y Rescate"), desc, url("towing", lang),
@@ -798,6 +803,7 @@ def page_freight(lang):
   <div class="sec-head single"><span class="kicker">FAQ</span><h2>{t('Freight questions', 'Preguntas sobre carga')}</h2></div>
   {faq_block(faqs)}
 </div></section>
+{related_services(lang, 'freight')}
 {quote_section(lang, 'freight', title=t('Quote your lanes', 'Cotice sus rutas'), intro=t('Send your lanes, weekly volume and freight type. We reply with a rate and a capacity plan.', 'Envíe sus rutas, volumen semanal y tipo de carga. Le respondemos con tarifa y plan de capacidad.'))}
 """
     title = t("Freight Trucking & Dedicated Contract Hauling | Orlando, Florida & Southeast | R&J Transport Service Inc.",
@@ -873,6 +879,46 @@ def page_area(lang, a):
            "provider": {"@id": ORG_ID}, "serviceType": ["Heavy duty towing", "Freight trucking"],
            "areaServed": [{"@type": "Place", "name": p} for p in a["schema_areas"]]}
     write(url(key, lang), shell(lang, key, c["title"], c["desc"], body, [svc, breadcrumb_schema(crumbs), faq_schema(c["faqs"])]))
+
+
+def related_services(lang, exclude=None):
+    t = (lambda en, es: en if lang == "en" else es)
+    items = [("svc-" + sv["key"], sv["nav"][lang]) for sv in SERVICES] + [("towing", t("Heavy towing", "Grúa pesada")), ("freight", t("Freight & contracts", "Carga y contratos"))]
+    lis = "".join('<li><a href="%s">%s%s</a></li>' % (url(k, lang), escape(n), ic("arrow")) for k, n in items if k != exclude)
+    return ('<section class="section light alt"><div class="wrap"><div class="sec-head single"><span class="kicker">%s</span><h2>%s</h2></div>'
+            '<ul class="region-list related">%s</ul></div></section>') % (t("Our services in Orlando", "Nuestros servicios en Orlando"), t("More from R&amp;J", "Más de R&amp;J"), lis)
+
+
+def page_service(lang, sv):
+    t = (lambda en, es: en if lang == "en" else es)
+    key = "svc-" + sv["key"]
+    c = sv["content"][lang]
+    crumbs = [(UI[lang]["home"], url("home", lang)), (sv["nav"][lang], url(key, lang))]
+    tow = sv["mode"] == "tow"
+    ctas = (call_btn(lang, label=t("Call Now (407) 595-9726", "Llame Ya (407) 595-9726")) + quote_link(lang, mode="tow", label=t("Request a Tow", "Solicitar Grúa"))) if tow \
+        else (quote_link(lang, cls="btn btn-red", mode="freight", label=t("Get a Freight Quote", "Cotizar Carga")) + call_btn(lang, cls="btn btn-ghost"))
+    body = page_hero(lang, crumbs, c["kicker"], c["h1"], c["lede"], img=sv["img"], ctas=ctas)
+    body += f"""
+<section class="section light"><div class="wrap split">
+  <div><span class="kicker">{escape(sv['nav'][lang])}</span><h2>{c['h2']}</h2>
+    <div class="prose" style="margin-top:22px">{''.join('<p>%s</p>' % p for p in c['paras'])}</div></div>
+  <div><h3 style="font-family:var(--display);text-transform:uppercase;font-size:24px;margin-bottom:14px">{t('What we handle', 'Lo que atendemos')}</h3>{checks(c['checks'])}</div>
+</div></section>
+<section class="section"><div class="wrap">{features(c['features'])}
+  <div style="margin-top:34px"><span class="kicker">{t('Where we work', 'Dónde trabajamos')}</span><div style="margin-top:14px">{chips(c['places'])}</div></div>
+</div></section>
+{cta_band(lang)}
+<section class="section light"><div class="wrap">
+  <div class="sec-head single"><span class="kicker">FAQ</span><h2>{t('Questions', 'Preguntas frecuentes')}</h2></div>
+  {faq_block(c['faqs'])}
+</div></section>
+{related_services(lang, key)}
+{quote_section(lang, sv['mode'])}
+"""
+    svc = service_schema(re.sub(r"<[^>]+>", "", c["h1"]).replace("&amp;", "&"), c["desc"], url(key, lang),
+                         ["Orlando, FL", "Orange County, FL", "Central Florida"] + ([] if tow else ["Florida", "Southeastern United States"]), lang, sv["stype"])
+    write(url(key, lang), shell(lang, key, c["title"], c["desc"], body, [svc, breadcrumb_schema(crumbs), faq_schema(c["faqs"])],
+                                og_image="/img/%s.jpg" % sv["img"]))
 
 
 def page_contact(lang):
@@ -985,7 +1031,7 @@ def write_sitemap():
 
 def clean():
     """Remove previously generated folders so renamed pages don't linger."""
-    for d in ["es", "heavy-towing", "freight-trucking", "service-areas", "contact", "blog"]:
+    for d in ["es", "heavy-towing", "freight-trucking", "service-areas", "contact", "blog"] + [sv["slug"]["en"] for sv in SERVICES]:
         shutil.rmtree(os.path.join(ROOT, d), ignore_errors=True)
 
 
@@ -998,6 +1044,8 @@ def main():
         page_areas(lang)
         for a in AREAS:
             page_area(lang, a)
+        for sv in SERVICES:
+            page_service(lang, sv)
         page_contact(lang)
         page_blog(lang)
         for p in BLOG_POSTS:
