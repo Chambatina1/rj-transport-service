@@ -674,9 +674,9 @@ def page_towing(lang):
         ("¿Piden depósito para el servicio de grúa?", "Sí. Para confirmar el servicio, pedimos un depósito de $100 por Zelle al (407) 595-9726 (R&J Transport Service Inc.) antes de enviar la grúa. Es una garantía de que el trabajo se hará, para que la grúa no haga el viaje en vano. El depósito se descuenta del total del servicio y puede ser reembolsable en algunos casos."),
     ])
     body = page_hero(lang, crumbs, t("24-hour heavy towing · Orlando, FL", "Grúa pesada 24 horas · Orlando, FL"),
-                     t('Heavy Duty <span class="red-text">Towing</span> &amp; Recovery', 'Servicio de <span class="red-text">Grúa Pesada</span> y Rescate'),
-                     t("Semis, tractor-trailers, buses, box trucks and heavy equipment. One call to (407) 595-9726 — day or night, every day of the year.",
-                       "Semis, tractocamiones, autobuses, camiones caja y equipo pesado. Una llamada al (407) 595-9726 — de día o de noche, todos los días del año."),
+                     t('Heavy-Duty <span class="red-text">Towing Service</span> in Orlando', 'Servicio de <span class="red-text">Grúa</span> en Orlando'),
+                     t("Heavy-duty tow trucks for semis, tractor-trailers, buses, box trucks and heavy equipment in Orlando and Central Florida. One call to (407) 595-9726 — day or night, every day of the year.",
+                       "Grúas pesadas para semis, tractocamiones, autobuses, camiones caja y equipo pesado en Orlando y Florida Central. Una llamada al (407) 595-9726 — de día o de noche, todos los días del año."),
                      img="wrecker",
                      ctas=call_btn(lang, label=t("Call Now (407) 595-9726", "Llame Ya (407) 595-9726")) + quote_link(lang, mode="tow", label=t("Request a Tow", "Solicitar Grúa")))
     body += f"""
@@ -726,10 +726,10 @@ def page_towing(lang):
 {related_services(lang, 'towing')}
 {quote_section(lang, 'tow', title=t('Request a tow or set up your fleet', 'Solicite una grúa o registre su flota'))}
 """
-    title = t("24-Hour Heavy-Duty Towing in Orlando, FL | Semi & Truck Towing | R&J Transport Service Inc.",
-              "Servicio de Grúa Pesada 24 Horas en Orlando, FL | Remolque de Camiones y Semis | R&J Transport Service Inc.")
-    desc = t("24/7 heavy-duty towing in Orlando: semi-trucks, tractor-trailers, buses, box trucks and heavy equipment. Accident recovery and long-distance tows. Call (407) 595-9726.",
-             "Grúa pesada 24/7 en Orlando: semis, tractocamiones, autobuses, camiones caja y equipo pesado. Rescate en accidentes y larga distancia. Llame al (407) 595-9726.")
+    title = t("Towing Service in Orlando, FL | 24/7 Heavy-Duty Tow Truck | R&J Transport Service Inc.",
+              "Servicio de Grúa en Orlando, FL | Grúa Pesada 24 Horas | R&J Transport Service Inc.")
+    desc = t("Towing service in Orlando 24/7: heavy-duty tow trucks for semis, tractor-trailers, buses, box trucks and heavy equipment. Accident recovery and long-distance tows. Call (407) 595-9726.",
+             "Servicio de grúa en Orlando 24 horas: grúas pesadas para semis, tractocamiones, autobuses, camiones caja y equipo pesado. Rescate en accidentes y larga distancia. Llame al (407) 595-9726.")
     svc = service_schema(t("Heavy Duty Towing & Recovery", "Grúa Pesada y Rescate"), desc, url("towing", lang),
                          ["Orlando, FL", "Central Florida", "Florida"], lang, "Heavy duty towing")
     write(url("towing", lang), shell(lang, "towing", title, desc, body, [svc, breadcrumb_schema(crumbs), faq_schema(faqs)]))
