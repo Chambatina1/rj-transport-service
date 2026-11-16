@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Nuestra historia — vista previa | R&amp;J Transport Service Inc.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;600;700&family=Caveat:wght@600;700&display=swap">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+:root{--ink:#0c0e11;--ink2:#13161a;--line:#2c333c;--red:#d4252d;--red2:#ef3a42;--text:#eef1f4;--muted:#a2abb6;
+  --display:"Barlow Condensed","Arial Narrow",sans-serif;--body:Barlow,system-ui,sans-serif;--hand:Caveat,"Segoe Print",cursive;
+  --P:min(440px,42vw);--H:calc(var(--P)*1.32)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--ink);color:var(--text);font-family:var(--body);line-height:1.6}
+.banner{position:sticky;top:0;z-index:50;background:#f2c94c;color:#111;font-weight:700;font-size:14px;text-align:center;padding:8px 16px}
+.banner button{margin-left:12px;font:inherit;font-size:13px;border:1.5px solid #111;background:transparent;border-radius:6px;padding:2px 10px;cursor:pointer}
+.intro{max-width:760px;margin:0 auto;padding:72px 16px 24px;text-align:center}
+.kicker{font-family:var(--display);font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red2);font-size:15px}
+.intro h2{font-family:var(--display);font-weight:800;font-size:clamp(40px,7vw,72px);line-height:1;text-transform:uppercase;margin:10px 0 16px}
+.intro p{color:var(--muted);font-size:18px}
+.hint{margin-top:18px;font-size:14px;color:var(--muted);letter-spacing:1px}
+.hint::after{content:"";display:block;width:2px;height:36px;margin:10px auto 0;background:linear-gradient(var(--red2),transparent)}
+
+/* Scroll stage */
+.stage{position:relative;height:720vh}
+.sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 60%,#1d2228 0%,var(--ink) 70%)}
+.book{position:relative;width:calc(var(--P)*2);height:var(--H);perspective:2200px;transition:transform .5s ease}
+.book.closed{transform:translateX(calc(var(--P)*-0.5))}
+.progress{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+.progress i{width:26px;height:4px;border-radius:2px;background:#39414b;transition:background .3s}
+.progress i.on{background:var(--red2)}
+
+/* Pages */
+.base{position:absolute;top:0;right:0;width:var(--P);height:100%}
+.leaf{position:absolute;top:0;right:0;width:var(--P);height:100%;transform-origin:left center;transform-style:preserve-3d;transition:transform .08s linear}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;border-radius:2px 8px 8px 2px}
+.back{transform:rotateY(180deg);border-radius:8px 2px 2px 8px}
+.paper{background-color:#f3e6c7;
+  background-image:
+    radial-gradient(circle at 12% 18%,rgba(150,70,20,.28) 0 2px,transparent 3px),
+    radial-gradient(circle at 78% 9%,rgba(150,70,20,.22) 0 3px,transparent 4px),
+    radial-gradient(circle at 88% 74%,rgba(150,70,20,.25) 0 2px,transparent 3px),
+    radial-gradient(circle at 30% 92%,rgba(150,70,20,.2) 0 2px,transparent 3px),
+    radial-gradient(ellipse 2.2px 1.4px at 50% 50%,#d9a64e 90%,transparent 100%),
+    linear-gradient(180deg,rgba(255,255,255,.35),rgba(120,80,20,.12));
+  background-size:auto,auto,auto,auto,7px 6px,auto;
+  box-shadow:inset 18px 0 22px -14px rgba(0,0,0,.35),0 2px 6px rgba(0,0,0,.25);color:#3a2a14}
+.back.paper{box-shadow:inset -18px 0 22px -14px rgba(0,0,0,.35),0 2px 6px rgba(0,0,0,.25)}
+.paper::before{content:"";position:absolute;left:10px;top:14%;bottom:14%;width:14px;
+  background:radial-gradient(circle,#8a8f96 0 4px,#4b5057 5px,transparent 6px) 0 0/14px 33.3% repeat-y;opacity:.9}
+.back.paper::before{left:auto;right:10px}
+.sleeve::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(118deg,transparent 30%,rgba(255,255,255,.22) 38%,transparent 46%),linear-gradient(200deg,transparent 60%,rgba(255,255,255,.12) 66%,transparent 72%)}
+
+.pg{position:absolute;inset:0;padding:22px 22px 18px 40px;display:flex;flex-direction:column}
+.back .pg{padding:22px 40px 18px 22px;align-items:center;justify-content:center;text-align:center}
+.tag{font-family:var(--hand);font-weight:700;font-size:calc(var(--P)*.075);line-height:1;color:#7a1d17}
+.cap{font-size:calc(var(--P)*.033);line-height:1.45;margin-top:auto;padding-top:8px;color:#4a3720}
+.cap small{display:block;font-style:italic;opacity:.75;margin-top:2px}
+.prints{position:relative;flex:1;margin-top:8px}
+.print{position:absolute;background:#fbf8f1;padding:5px;box-shadow:0 3px 8px rgba(0,0,0,.35)}
+.print img{display:block;width:100%;height:100%;object-fit:cover;filter:sepia(.12) saturate(.92) contrast(.96)}
+.print.pol{padding:6px 6px 26px}
+.print.pol figcaption{position:absolute;left:8px;bottom:3px;font-family:var(--hand);font-size:calc(var(--P)*.04);color:#23306b}
+.big{font-family:var(--hand);font-weight:700;font-size:calc(var(--P)*.25);line-height:.9;color:#7a1d17}
+.note{font-family:var(--hand);font-size:calc(var(--P)*.06);color:#4a3720;margin-top:10px;max-width:85%}
+
+/* Cover */
+.cover{background:#b3141c;background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.09) 0 10px,transparent 10px 22px),radial-gradient(ellipse at 30% 20%,rgba(255,255,255,.18),transparent 60%),linear-gradient(160deg,#c81c24,#8f0f16);
+  box-shadow:inset 10px 0 18px -8px rgba(0,0,0,.6),0 2px 6px rgba(0,0,0,.4);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#f7e7c6}
+.seal{width:calc(var(--P)*.36);height:calc(var(--P)*.36);border-radius:50%;border:3px solid #d8b36a;display:grid;place-items:center;
+  font-family:var(--display);font-weight:800;font-size:calc(var(--P)*.13);color:#e9cd8b;background:rgba(0,0,0,.25);box-shadow:inset 0 0 0 6px rgba(216,179,106,.25)}
+.cover h3{font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:4px;font-size:calc(var(--P)*.075);margin-top:22px;color:#f3dfb4}
+.cover p{font-family:var(--display);letter-spacing:6px;text-transform:uppercase;font-size:calc(var(--P)*.038);color:#e9cd8b;margin-top:6px}
+.inside{background:#ece8df;background-image:radial-gradient(rgba(0,0,0,.05) 1px,transparent 1.5px);background-size:4px 4px}
+
+/* Today page: crisp, no sleeve */
+.today .print img{filter:none}
+.today .tag{color:#b3141c}
+
+/* CTA base page */
+.cta{background:#14181d;border:1px solid var(--line);color:var(--text);display:flex;flex-direction:column;justify-content:center;padding:30px 30px 30px 40px;border-radius:2px 8px 8px 2px;height:100%;box-shadow:0 24px 50px rgba(0,0,0,.55)}
+.cta h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:calc(var(--P)*.09);line-height:1.02}
+.cta p{color:var(--muted);margin:12px 0 20px;font-size:calc(var(--P)*.036)}
+.btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:12px 18px;border-radius:8px;text-decoration:none;font-size:16px;margin:0 8px 8px 0}
+.btn-red{background:var(--red);color:#fff}.btn-ghost{border:1.5px solid #4a535e;color:#fff}
+
+@media (max-width:760px){
+  :root{--P:min(88vw,420px);--H:min(calc(var(--P)*1.6),calc(100vh - 140px))}
+  .book{width:var(--P)}
+  .book.closed{transform:none}
+  .sticky{padding-top:30px}
+  .tag{font-size:calc(var(--P)*.085)}
+  .cap{font-size:13.5px}
+  .back{visibility:hidden}
+}
+.en{display:none}
+html[lang=en] .es{display:none}html[lang=en] .en{display:revert}
+</style>
+</head>
+<body>
+<div class="banner"><span class="es">Vista previa — fotos provisionales tomadas del álbum. No está publicado.</span><span class="en">Preview — placeholder photos from the album. Not published.</span>
+  <button type="button" id="lang">EN / ES</button></div>
+
+<section class="intro">
+  <span class="kicker"><span class="es">Desde 2004</span><span class="en">Since 2004</span></span>
+  <h2><span class="es">Nuestra historia</span><span class="en">Our story</span></h2>
+  <p><span class="es">Antes de los videos y las redes, había un álbum rojo. Estas son las fotos que guarda el dueño: los años en la carretera que llevaron a R&amp;J Transport Service Inc.</span>
+     <span class="en">Before videos and social media, there was a red album. These are the photos the owner kept: the years on the road that led to R&amp;J Transport Service Inc.</span></p>
+  <div class="hint"><span class="es">Baje para abrir el álbum</span><span class="en">Scroll to open the album</span></div>
+</section>
+
+<section class="stage" id="stage">
+ <div class="sticky">
+  <div class="book closed" id="book">
+   <div class="base"><div class="cta">
+     <span class="kicker"><span class="es">La próxima página</span><span class="en">The next page</span></span>
+     <h3><span class="es">¿Su carga es el próximo capítulo?</span><span class="en">Is your load the next chapter?</span></h3>
+     <p><span class="es">Grúa pesada 24 horas y transporte de carga desde Orlando, desde 2004.</span><span class="en">24-hour heavy towing and freight trucking from Orlando, since 2004.</span></p>
+     <div><a class="btn btn-red" href="/contact/#quote"><span class="es">Pida su cotización</span><span class="en">Get a quote</span></a><a class="btn btn-ghost" href="tel:+14075959726">(407) 595-9726</a></div>
+   </div></div>
+
+   <!-- 0: cover -->
+   <div class="leaf">
+     <div class="face cover"><div class="seal">R&amp;J</div><h3><span class="es">Nuestra historia</span><span class="en">Our story</span></h3><p><span class="es">Desde 2004</span><span class="en">Since 2004</span></p></div>
+     <div class="face back inside"><div class="pg"><div class="note" style="font-size:calc(var(--P)*.08)"><span class="es">Así empezó todo…</span><span class="en">Where it all started…</span></div></div></div>
+   </div>
+
+   <!-- 1: before 2004 -->
+   <div class="leaf">
+     <div class="face paper sleeve"><div class="pg">
+       <div class="tag"><span class="es">Antes de 2004 · Aprendiendo el oficio</span><span class="en">Before 2004 · Learning the trade</span></div>
+       <div class="prints">
+         <figure class="print" style="left:2%;top:0;width:66%;height:40%;transform:rotate(-2deg)"><img src="img/old-cab.jpg" alt=""></figure>
+         <figure class="print" style="right:0;top:30%;width:64%;height:40%;transform:rotate(2.5deg)"><img src="img/old-driver.jpg" alt=""></figure>
+         <figure class="print" style="left:4%;bottom:0;width:58%;height:34%;transform:rotate(-1deg)"><img src="img/old-beam.jpg" alt=""></figure>
+       </div>
+       <p class="cap"><span class="es">Años de carretera moviendo cargas grandes, antes de fundar R&amp;J.<small>Fotos de esa época, trabajando para otra compañía.</small></span><span class="en">Years on the road hauling big loads, before founding R&amp;J.<small>Photos from that time, working for another company.</small></span></p>
+     </div></div>
+     <div class="face back paper"><div class="pg"><div class="note"><span class="es">Miles de millas antes de tener nombre propio.</span><span class="en">Thousands of miles before it had its own name.</span></div></div></div>
+   </div>
+
+   <!-- 2: big loads -->
+   <div class="leaf">
+     <div class="face paper sleeve"><div class="pg">
+       <div class="tag"><span class="es">Cargas que no caben en cualquier tráiler</span><span class="en">Loads that don't fit just any trailer</span></div>
+       <div class="prints">
+         <figure class="print" style="left:0;top:0;width:46%;height:56%;transform:rotate(-3deg)"><img src="img/old-polaroid.jpg" alt=""></figure>
+         <figure class="print" style="right:0;top:4%;width:50%;height:40%;transform:rotate(2deg)"><img src="img/old-crew.jpg" alt=""></figure>
+         <figure class="print" style="right:6%;bottom:0;width:60%;height:38%;transform:rotate(-1.5deg)"><img src="img/old-road.jpg" alt=""></figure>
+       </div>
+       <p class="cap"><span class="es">Vigas de 95 pies y más de 75 mil libras. Así se aprende a mover lo que pocos mueven.</span><span class="en">95-foot beams over 75,000 pounds. That's how you learn to move what few can.</span></p>
+     </div></div>
+     <div class="face back paper"><div class="pg"><div class="note"><span class="es">Cada carga, una lección.</span><span class="en">Every load, a lesson.</span></div></div></div>
+   </div>
+
+   <!-- 3: on the road -->
+   <div class="leaf">
+     <div class="face paper sleeve"><div class="pg">
+       <div class="tag"><span class="es">Día y noche en la carretera</span><span class="en">Day and night on the road</span></div>
+       <div class="prints">
+         <figure class="print" style="left:0;top:0;width:56%;height:36%;transform:rotate(-2deg)"><img src="img/old-flatbed.jpg" alt=""></figure>
+         <figure class="print" style="right:0;top:6%;width:48%;height:34%;transform:rotate(3deg)"><img src="img/old-loader.jpg" alt=""></figure>
+         <figure class="print" style="left:6%;bottom:0;width:66%;height:40%;transform:rotate(1deg)"><img src="img/old-trailer.jpg" alt=""></figure>
+       </div>
+       <p class="cap"><span class="es">Equipo pesado, obras y rescates de noche: el oficio que hoy es R&amp;J.</span><span class="en">Heavy equipment, job sites and night recoveries: the trade that became R&amp;J.</span></p>
+     </div></div>
+     <div class="face back paper"><div class="pg"><div class="big">2004</div></div></div>
+   </div>
+
+   <!-- 4: 2004 -->
+   <div class="leaf">
+     <div class="face paper sleeve"><div class="pg">
+       <div class="tag"><span class="es">2004 · Nace R&amp;J Transport Service Inc.</span><span class="en">2004 · R&amp;J Transport Service Inc. is born</span></div>
+       <div class="prints">
+         <figure class="print" style="left:12%;top:2%;width:76%;height:92%;transform:rotate(-1deg)"><img src="img/sign.jpg" alt="" style="object-position:50% 40%"></figure>
+       </div>
+       <p class="cap"><span class="es">En Orlando nace R&amp;J: grúa pesada y transporte de carga con nombre propio.</span><span class="en">R&amp;J is founded in Orlando: heavy towing and freight trucking under its own name.</span></p>
+     </div></div>
+     <div class="face back paper"><div class="pg"><div class="big" style="font-size:calc(var(--P)*.2)"><span class="es">Hoy</span><span class="en">Today</span></div></div></div>
+   </div>
+
+   <!-- 5: today -->
+   <div class="leaf">
+     <div class="face paper today"><div class="pg">
+       <div class="tag"><span class="es">Hoy · La misma carretera, otra flota</span><span class="en">Today · Same road, a new fleet</span></div>
+       <div class="prints">
+         <figure class="print" style="left:0;top:0;width:100%;height:46%"><img src="/img/wrecker.jpg" alt=""></figure>
+         <figure class="print" style="left:0;bottom:0;width:49%;height:48%"><img src="/img/fleet-kenworth.jpg" alt=""></figure>
+         <figure class="print" style="right:0;bottom:0;width:49%;height:48%"><img src="/img/cargo-crate.jpg" alt=""></figure>
+       </div>
+       <p class="cap"><span class="es">Grúas pesadas propias y carga por contrato en Florida y el Sureste.</span><span class="en">Our own heavy wreckers and contract freight across Florida and the Southeast.</span></p>
+     </div></div>
+     <div class="face back paper"><div class="pg"><div class="note"><span class="es">Gracias por ser parte de la historia.</span><span class="en">Thanks for being part of the story.</span></div></div></div>
+   </div>
+  </div>
+  <div class="progress" id="dots"></div>
+ </div>
+</section>
+
+<section class="intro" style="padding-bottom:80px"><p><span class="es">(Aquí continúa el resto de la página de inicio.)</span><span class="en">(The rest of the home page continues here.)</span></p></section>
+
+<script>
+(function(){
+  var html=document.documentElement;
+  var q=new URLSearchParams(location.search); if(q.get("lang")==="en") html.lang="en";
+  document.getElementById("lang").onclick=function(){html.lang=html.lang==="en"?"es":"en";};
+  var stage=document.getElementById("stage"), book=document.getElementById("book");
+  var leaves=[].slice.call(book.querySelectorAll(".leaf")), n=leaves.length;
+  var dots=document.getElementById("dots"); for(var i=0;i<=n;i++){dots.appendChild(document.createElement("i"));}
+  var ds=dots.children;
+  function update(){
+    var r=stage.getBoundingClientRect(), total=stage.offsetHeight-innerHeight;
+    var p=Math.min(Math.max(-r.top/total,0),1)*(n+0.15);           /* leaves flipped (fractional) */
+    book.classList.toggle("closed",p<0.5 && innerWidth>760);
+    leaves.forEach(function(l,i){
+      var f=Math.min(Math.max(p-i,0),1); f=f<.15?0:f>.85?1:(f-.15)/.7;  /* hold, then flip */
+      l.style.transform="rotateY("+(-180*f)+"deg)";
+      l.style.zIndex=f>.5?(10+i):(100-i);
+    });
+    var cur=Math.min(Math.floor(p+0.0001),n); for(var k=0;k<ds.length;k++) ds[k].classList.toggle("on",k<=cur);
+  }
+  addEventListener("scroll",update,{passive:true}); addEventListener("resize",update); update();
+})();
+</script>
+</body>
+</html>
