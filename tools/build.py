@@ -10,11 +10,12 @@ The hosting (Render static site) serves the generated files as-is.
 import json
 import os
 import shutil
+import re
 import hashlib
 from datetime import date
 from html import escape
 
-from content import BLOG_POSTS, AREAS, REVIEWS
+from content import BLOG_POSTS, AREAS, REVIEWS, SERVICES
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -39,10 +40,10 @@ SITE = {
     # FormSubmit forwards each request to the email below. The first submission
     # sends an activation email to that inbox; click "Activate" once.
     "form_endpoint": "https://formsubmit.co/ajax/rjtransportusa@gmail.com",
-    # Google Business Profile links. Replace with the profile's own "Reviews" and
-    # "Ask for reviews" share links when available (more reliable than a search).
-    "google_reviews_url": "https://www.google.com/maps/search/?api=1&query=R%26J+Transport+Service+Inc+4980+Patch+Rd+Orlando+FL+32822",
-    "google_write_review_url": "",
+    # Google Business Profile (link provided by the owner). Opens the profile on
+    # Google Maps, where the customer taps "Write a review" / "Escribir una reseña".
+    "google_reviews_url": "https://maps.app.goo.gl/pThtAwe5QoyDAcdh6",
+    "google_write_review_url": "https://maps.app.goo.gl/pThtAwe5QoyDAcdh6",
 }
 BUILD_DATE = date.today().isoformat()
 _ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -61,11 +62,14 @@ ROUTES = {
     "freight": {"en": "/freight-trucking/", "es": "/es/transporte-de-carga/"},
     "areas":   {"en": "/service-areas/", "es": "/es/areas-de-servicio/"},
     "contact": {"en": "/contact/", "es": "/es/contacto/"},
+    "review":  {"en": "/review/", "es": "/es/resena/"},
     "blog":    {"en": "/blog/", "es": "/es/blog/"},
 }
 for a in AREAS:
     ROUTES["area-" + a["key"]] = {"en": "/service-areas/%s/" % a["slug"]["en"],
                                   "es": "/es/areas-de-servicio/%s/" % a["slug"]["es"]}
+for sv in SERVICES:
+    ROUTES["svc-" + sv["key"]] = {"en": "/%s/" % sv["slug"]["en"], "es": "/es/%s/" % sv["slug"]["es"]}
 for p in BLOG_POSTS:
     ROUTES["post-" + p["key"]] = {"en": "/blog/%s/" % p["slug"]["en"],
                                   "es": "/es/blog/%s/" % p["slug"]["es"]}
@@ -367,9 +371,9 @@ def gallery(lang):
 
 def reviews_section(lang):
     """Real customer reviews only (tools/content.py REVIEWS). Renders nothing until real reviews exist."""
-    if not REVIEWS:
-        return ""
     t = (lambda en, es: en if lang == "en" else es)
+    if not REVIEWS:
+        return review_band(lang)
     read_url = SITE["google_reviews_url"]
     write_url = SITE["google_write_review_url"] or read_url
     star = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>'
@@ -393,6 +397,61 @@ def reviews_section(lang):
          ('<div class="reviews">%s</div>' % cards) if cards else "",
          escape(read_url), t("Read our Google reviews", "Ver reseñas en Google"),
          escape(write_url), t("Leave us a review", "Déjenos una reseña"))
+
+
+STAR = '<svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path fill="currentColor" d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>'
+
+
+def review_btn(lang, cls="btn btn-red"):
+    t = (lambda en, es: en if lang == "en" else es)
+    return '<a class="%s" href="%s" target="_blank" rel="noopener">%s<span>%s</span></a>' % (
+        cls, escape(SITE["google_write_review_url"]), STAR, t("Leave us a Google review", "Déjenos una reseña en Google"))
+
+
+def review_band(lang):
+    """Call to action only: asks real customers to review us on Google. Shows no reviews."""
+    t = (lambda en, es: en if lang == "en" else es)
+    return (
+        '<section class="review-band" id="reviews"><div class="wrap"><div>'
+        '<h2>%s</h2><p>%s</p></div>'
+        '<div class="ctas">%s<a class="btn btn-ghost" href="%s">%s</a></div></div></section>'
+    ) % (t("Did we tow or haul for you?", "¿Le hicimos un servicio de grúa o carga?"),
+         t("Tell others on Google. It takes one minute, in English or Spanish.",
+           "Cuénteselo a otros en Google. Toma un minuto, en español o en inglés."),
+         review_btn(lang), url("review", lang), t("QR code to share", "Código QR para compartir"))
+
+
+def page_review(lang):
+    """Short page to text/WhatsApp to customers or print as a QR: one big review button."""
+    t = (lambda en, es: en if lang == "en" else es)
+    body = f"""<section class="section review-page"><div class="wrap">
+  <span class="kicker">{t('Reviews', 'Reseñas')}</span>
+  <h1>{t('Thank you for choosing <span class="red-text">R&amp;J</span>', 'Gracias por elegir a <span class="red-text">R&amp;J</span>')}</h1>
+  <p class="lede">{t('Your review helps other drivers and companies in Orlando find a tow truck and a carrier they can trust. Write it in English or Spanish.', 'Su reseña ayuda a otros choferes y empresas en Orlando a encontrar una grúa y un transportista de confianza. Escríbala en español o en inglés.')}</p>
+  <div class="ctas">{review_btn(lang, "btn btn-red btn-xl")}</div>
+  <ol class="review-steps">
+    <li>{t('Tap the button. Google Maps opens on our business.', 'Toque el botón. Google Maps se abre en nuestro negocio.')}</li>
+    <li>{t('Tap <b>Reviews</b>, then <b>Write a review</b>.', 'Toque <b>Reseñas</b> y luego <b>Escribir una reseña</b>.')}</li>
+    <li>{t('Choose the stars and tell us how it went.', 'Elija las estrellas y cuéntenos cómo le fue.')}</li>
+  </ol>
+  <figure class="review-qr"><img src="/img/review-qr.svg" alt="{t('QR code that opens R&amp;J Transport Service Inc. on Google Maps to leave a review', 'Código QR que abre R&amp;J Transport Service Inc. en Google Maps para dejar una reseña')}" width="240" height="240"><figcaption>{t('Scan with your phone camera', 'Escanee con la cámara del teléfono')}</figcaption></figure>
+</div></section>"""
+    title = t("Leave a Review | R&J Transport Service Inc. | Orlando, FL", "Deje una Reseña | R&J Transport Service Inc. | Orlando, FL")
+    desc = t("Leave a Google review for R&J Transport Service Inc., heavy towing and freight in Orlando, FL.",
+             "Deje una reseña en Google para R&J Transport Service Inc., grúa pesada y carga en Orlando, FL.")
+    html = shell(lang, "review", title, desc, body)
+    SITEMAP.pop()  # utility page: shared by text/QR, kept out of search results
+    write(url("review", lang), html.replace('<link rel="canonical"', '<meta name="robots" content="noindex"><link rel="canonical"', 1))
+
+
+def make_review_qr():
+    """img/review-qr.svg (committed). Regenerated only when segno is installed."""
+    try:
+        import segno
+    except ImportError:
+        return
+    qr = segno.make(SITE["google_write_review_url"], error="h")
+    qr.save(os.path.join(ROOT, "img", "review-qr.svg"), scale=8, border=2, dark="#0c0e11", light="#ffffff", xmldecl=False)
 
 
 def page_hero(lang, crumbs, kicker, h1, lede, img="wrecker", ctas=None):
@@ -435,6 +494,7 @@ def shell(lang, key, title, desc, body, schemas=(), og_image="/img/yard-wrecker.
     mobile_items += '<a href="%s" hreflang="%s" lang="%s">%s</a>' % (url(key, other), other, other, "English" if other == "en" else "Español")
     schema_html = "".join('<script type="application/ld+json">%s</script>' % json.dumps(s, ensure_ascii=False, separators=(",", ":")) for s in [business_schema(lang)] + list(schemas))
     foot_services = "".join('<li><a href="%s">%s</a></li>' % (url(k, lang), escape(l)) for k, l in ui["nav"][:2])
+    foot_services += "".join('<li><a href="%s">%s</a></li>' % (url("svc-" + sv["key"], lang), escape(sv["nav"][lang])) for sv in SERVICES)
     foot_services += '<li><a href="%s">%s</a></li>' % (url("blog", lang), "Blog")
     foot_areas = "".join('<li><a href="%s">%s</a></li>' % (url("area-" + a["key"], lang), escape(a["name"][lang])) for a in AREAS)
     SITEMAP.append(key)
@@ -495,6 +555,7 @@ def shell(lang, key, title, desc, body, schemas=(), og_image="/img/yard-wrecker.
         <address><strong style="color:#fff">{SITE['legal']}</strong><br>{SITE['street']}<br>{SITE['city']}, {SITE['region']} {SITE['zip']}<br>
         <a href="tel:{SITE['phone_e164']}" style="color:#fff;font-weight:700">{SITE['phone_display']}</a><br><a href="mailto:{SITE['email']}">{SITE['email']}</a><br>{ui['hours']}<br>USDOT #{SITE['usdot']}<br>
         <a href="{MAPS_URL}" target="_blank" rel="noopener">{ui['directions']} &rarr;</a></address>
+        <p style="margin-top:14px">{review_btn(lang, "btn btn-ghost btn-sm")}</p>
       </div>
     </div>
     <div class="foot-base"><span>&copy; {date.today().year} {SITE['legal']} {ui['rights']}</span><span><a href="{url(key, other)}" hreflang="{other}">{'Español' if other == 'es' else 'English'}</a></span></div>
@@ -645,7 +706,7 @@ def page_home(lang):
 {quote_section(lang, 'freight')}
 """
     title = t("Heavy Towing & Freight Trucking in Orlando, FL | Since 2004 | R&J Transport Service Inc.",
-              "Grúa Pesada y Transporte de Carga en Orlando, FL | Desde 2004 | R&J Transport Service Inc.")
+              "Servicio de Grúa Pesada y Transporte de Carga en Orlando, FL | Desde 2004 | R&J Transport Service Inc.")
     desc = t("24-hour heavy towing and contract freight trucking from Orlando, FL since 2004. Serving all of Florida, the Southeast and beyond. Call (407) 595-9726.",
              "Grúa pesada 24 horas y transporte de carga por contrato desde Orlando, FL desde 2004. Toda Florida, el Sureste y más allá. Llame al (407) 595-9726.")
     write(url("home", lang), shell(lang, "home", title, desc, body, [faq_schema(faqs)]))
@@ -670,9 +731,9 @@ def page_towing(lang):
         ("¿Piden depósito para el servicio de grúa?", "Sí. Para confirmar el servicio, pedimos un depósito de $100 por Zelle al (407) 595-9726 (R&J Transport Service Inc.) antes de enviar la grúa. Es una garantía de que el trabajo se hará, para que la grúa no haga el viaje en vano. El depósito se descuenta del total del servicio y puede ser reembolsable en algunos casos."),
     ])
     body = page_hero(lang, crumbs, t("24-hour heavy towing · Orlando, FL", "Grúa pesada 24 horas · Orlando, FL"),
-                     t('Heavy Duty <span class="red-text">Towing</span> &amp; Recovery', 'Servicio de <span class="red-text">Grúa Pesada</span> y Rescate'),
-                     t("Semis, tractor-trailers, buses, box trucks and heavy equipment. One call to (407) 595-9726 — day or night, every day of the year.",
-                       "Semis, tractocamiones, autobuses, camiones caja y equipo pesado. Una llamada al (407) 595-9726 — de día o de noche, todos los días del año."),
+                     t('Heavy-Duty <span class="red-text">Towing Service</span> in Orlando', 'Servicio de <span class="red-text">Grúa</span> en Orlando'),
+                     t("Heavy-duty tow trucks for semis, tractor-trailers, buses, box trucks and heavy equipment in Orlando and Central Florida. One call to (407) 595-9726 — day or night, every day of the year.",
+                       "Grúas pesadas para semis, tractocamiones, autobuses, camiones caja y equipo pesado en Orlando y Florida Central. Una llamada al (407) 595-9726 — de día o de noche, todos los días del año."),
                      img="wrecker",
                      ctas=call_btn(lang, label=t("Call Now (407) 595-9726", "Llame Ya (407) 595-9726")) + quote_link(lang, mode="tow", label=t("Request a Tow", "Solicitar Grúa")))
     body += f"""
@@ -708,6 +769,7 @@ def page_towing(lang):
 </div></section>
 
 {cta_band(lang)}
+{review_band(lang)}
 
 <section class="section light alt"><div class="wrap">
   <div class="sec-head"><div><span class="kicker">{t('Where we tow', 'Dónde remolcamos')}</span><h2>{t('Central Florida and beyond', 'Florida Central y más allá')}</h2></div>
@@ -719,12 +781,13 @@ def page_towing(lang):
   <div class="sec-head single"><span class="kicker">FAQ</span><h2>{t('Heavy towing questions', 'Preguntas sobre grúa pesada')}</h2></div>
   {faq_block(faqs)}
 </div></section>
+{related_services(lang, 'towing')}
 {quote_section(lang, 'tow', title=t('Request a tow or set up your fleet', 'Solicite una grúa o registre su flota'))}
 """
-    title = t("24-Hour Heavy-Duty Towing in Orlando, FL | Semi & Truck Towing | R&J Transport Service Inc.",
-              "Grúa Pesada 24 Horas en Orlando, FL | Remolque de Camiones y Semis | R&J Transport Service Inc.")
-    desc = t("24/7 heavy-duty towing in Orlando: semi-trucks, tractor-trailers, buses, box trucks and heavy equipment. Accident recovery and long-distance tows. Call (407) 595-9726.",
-             "Grúa pesada 24/7 en Orlando: semis, tractocamiones, autobuses, camiones caja y equipo pesado. Rescate en accidentes y larga distancia. Llame al (407) 595-9726.")
+    title = t("Towing Service in Orlando, FL | 24/7 Heavy-Duty Tow Truck | R&J Transport Service Inc.",
+              "Servicio de Grúa en Orlando, FL | Grúa Pesada 24 Horas | R&J Transport Service Inc.")
+    desc = t("Towing service in Orlando 24/7: heavy-duty tow trucks for semis, tractor-trailers, buses, box trucks and heavy equipment. Accident recovery and long-distance tows. Call (407) 595-9726.",
+             "Servicio de grúa en Orlando 24 horas: grúas pesadas para semis, tractocamiones, autobuses, camiones caja y equipo pesado. Rescate en accidentes y larga distancia. Llame al (407) 595-9726.")
     svc = service_schema(t("Heavy Duty Towing & Recovery", "Grúa Pesada y Rescate"), desc, url("towing", lang),
                          ["Orlando, FL", "Central Florida", "Florida"], lang, "Heavy duty towing")
     write(url("towing", lang), shell(lang, "towing", title, desc, body, [svc, breadcrumb_schema(crumbs), faq_schema(faqs)]))
@@ -798,6 +861,7 @@ def page_freight(lang):
   <div class="sec-head single"><span class="kicker">FAQ</span><h2>{t('Freight questions', 'Preguntas sobre carga')}</h2></div>
   {faq_block(faqs)}
 </div></section>
+{related_services(lang, 'freight')}
 {quote_section(lang, 'freight', title=t('Quote your lanes', 'Cotice sus rutas'), intro=t('Send your lanes, weekly volume and freight type. We reply with a rate and a capacity plan.', 'Envíe sus rutas, volumen semanal y tipo de carga. Le respondemos con tarifa y plan de capacidad.'))}
 """
     title = t("Freight Trucking & Dedicated Contract Hauling | Orlando, Florida & Southeast | R&J Transport Service Inc.",
@@ -875,6 +939,49 @@ def page_area(lang, a):
     write(url(key, lang), shell(lang, key, c["title"], c["desc"], body, [svc, breadcrumb_schema(crumbs), faq_schema(c["faqs"])]))
 
 
+def related_services(lang, exclude=None):
+    t = (lambda en, es: en if lang == "en" else es)
+    items = [("svc-" + sv["key"], sv["nav"][lang]) for sv in SERVICES] + [("towing", t("Heavy towing", "Grúa pesada")), ("freight", t("Freight & contracts", "Carga y contratos"))]
+    lis = "".join('<li><a href="%s">%s%s</a></li>' % (url(k, lang), escape(n), ic("arrow")) for k, n in items if k != exclude)
+    return ('<section class="section light alt"><div class="wrap"><div class="sec-head single"><span class="kicker">%s</span><h2>%s</h2></div>'
+            '<ul class="region-list related">%s</ul></div></section>') % (t("Our services in Orlando", "Nuestros servicios en Orlando"), t("More from R&amp;J", "Más de R&amp;J"), lis)
+
+
+def page_service(lang, sv):
+    t = (lambda en, es: en if lang == "en" else es)
+    key = "svc-" + sv["key"]
+    c = sv["content"][lang]
+    crumbs = [(UI[lang]["home"], url("home", lang)), (sv["nav"][lang], url(key, lang))]
+    tow = sv["mode"] == "tow"
+    rental = sv["mode"] == "rental"
+    form_mode = "freight" if rental else sv["mode"]
+    ctas = (call_btn(lang) + quote_link(lang, mode="freight", label=t("Check availability", "Consultar disponibilidad"))) if rental else \
+        (call_btn(lang, label=t("Call Now (407) 595-9726", "Llame Ya (407) 595-9726")) + quote_link(lang, mode="tow", label=t("Request a Tow", "Solicitar Grúa"))) if tow \
+        else (quote_link(lang, cls="btn btn-red", mode="freight", label=t("Get a Freight Quote", "Cotizar Carga")) + call_btn(lang, cls="btn btn-ghost"))
+    body = page_hero(lang, crumbs, c["kicker"], c["h1"], c["lede"], img=sv["img"], ctas=ctas)
+    body += f"""
+<section class="section light"><div class="wrap split">
+  <div><span class="kicker">{escape(sv['nav'][lang])}</span><h2>{c['h2']}</h2>
+    <div class="prose" style="margin-top:22px">{''.join('<p>%s</p>' % p for p in c['paras'])}</div></div>
+  <div><h3 style="font-family:var(--display);text-transform:uppercase;font-size:24px;margin-bottom:14px">{t('What we handle', 'Lo que atendemos')}</h3>{checks(c['checks'])}</div>
+</div></section>
+<section class="section"><div class="wrap">{features(c['features'])}
+  <div style="margin-top:34px"><span class="kicker">{t('Where we work', 'Dónde trabajamos')}</span><div style="margin-top:14px">{chips(c['places'])}</div></div>
+</div></section>
+{cta_band(lang, *((t("Need the crane for a job?", "¿Necesita la grúa para un trabajo?"), t("With or without operator. One call to check availability.", "Con o sin operador. Una llamada para ver disponibilidad.")) if rental else ()))}
+<section class="section light"><div class="wrap">
+  <div class="sec-head single"><span class="kicker">FAQ</span><h2>{t('Questions', 'Preguntas frecuentes')}</h2></div>
+  {faq_block(c['faqs'])}
+</div></section>
+{related_services(lang, key)}
+{quote_section(lang, form_mode)}
+"""
+    svc = service_schema(re.sub(r"<[^>]+>", "", c["h1"]).replace("&amp;", "&"), c["desc"], url(key, lang),
+                         ["Orlando, FL", "Orange County, FL", "Central Florida"] + ([] if tow else ["Florida", "Southeastern United States"]), lang, sv["stype"])
+    write(url(key, lang), shell(lang, key, c["title"], c["desc"], body, [svc, breadcrumb_schema(crumbs), faq_schema(c["faqs"])],
+                                og_image="/img/%s.jpg" % sv["img"]))
+
+
 def page_contact(lang):
     t = (lambda en, es: en if lang == "en" else es)
     crumbs = [(UI[lang]["home"], url("home", lang)), (t("Contact", "Contacto"), url("contact", lang))]
@@ -891,6 +998,7 @@ def page_contact(lang):
   <div class="ctas" style="margin-top:24px"><a class="btn btn-red" href="{MAPS_URL}" target="_blank" rel="noopener">{ic('pin')}<span>{UI[lang]['directions']}</span></a></div></div>
 </div></section>
 """
+    body += review_band(lang)
     title = t("Contact R&J Transport Service Inc. | 24/7 Dispatch (407) 595-9726 | Orlando, FL",
               "Contacto R&J Transport Service Inc. | Despacho 24/7 (407) 595-9726 | Orlando, FL")
     desc = t("Call (407) 595-9726 for 24-hour heavy towing or request a freight quote. Visit us at 4980 Patch Rd, Orlando, FL 32822.",
@@ -985,7 +1093,7 @@ def write_sitemap():
 
 def clean():
     """Remove previously generated folders so renamed pages don't linger."""
-    for d in ["es", "heavy-towing", "freight-trucking", "service-areas", "contact", "blog"]:
+    for d in ["es", "heavy-towing", "freight-trucking", "service-areas", "contact", "review", "blog"] + [sv["slug"]["en"] for sv in SERVICES]:
         shutil.rmtree(os.path.join(ROOT, d), ignore_errors=True)
 
 
@@ -998,10 +1106,14 @@ def main():
         page_areas(lang)
         for a in AREAS:
             page_area(lang, a)
+        for sv in SERVICES:
+            page_service(lang, sv)
         page_contact(lang)
+        page_review(lang)
         page_blog(lang)
         for p in BLOG_POSTS:
             page_post(lang, p)
+    make_review_qr()
     page_404()
     write_sitemap()
     print("Built %d pages." % (len(set(SITEMAP)) * 2 + 1))
