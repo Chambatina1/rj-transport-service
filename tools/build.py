@@ -152,7 +152,7 @@ def stamp_svg(lang):
 # ---------------------------------------------------------------------------
 UI = {
     "en": {
-        "nav": [("towing", "Heavy Towing"), ("freight", "Freight & Contracts"), ("areas", "Service Areas"), ("blog", "Blog"), ("contact", "Contact")],
+        "nav": [("towing", "Heavy Towing"), ("freight", "Freight & Contracts"), ("svc-rental", "Crane Rental"), ("areas", "Service Areas"), ("blog", "Blog"), ("contact", "Contact")],
         "call": "Call 24/7", "quote": "Get a Quote", "skip": "Skip to content",
         "strip_left": "24-hour heavy towing &amp; dispatch", "strip_right": "Serving Florida &amp; the Southeast since 2004",
         "lang_label": "ES", "lang_title": "Ver en español", "home": "Home",
@@ -161,7 +161,7 @@ UI = {
         "hours": "Open 24 hours, 7 days a week", "directions": "Get directions", "text_us": "Quote",
     },
     "es": {
-        "nav": [("towing", "Grúa Pesada"), ("freight", "Carga y Contratos"), ("areas", "Áreas de Servicio"), ("blog", "Blog"), ("contact", "Contacto")],
+        "nav": [("towing", "Grúa Pesada"), ("freight", "Carga y Contratos"), ("svc-rental", "Renta de Grúa"), ("areas", "Áreas de Servicio"), ("blog", "Blog"), ("contact", "Contacto")],
         "call": "Llame 24/7", "quote": "Cotizar", "skip": "Ir al contenido",
         "strip_left": "Grúa pesada y despacho las 24 horas", "strip_right": "Sirviendo a Florida y el Sureste desde 2004",
         "lang_label": "EN", "lang_title": "View in English", "home": "Inicio",
@@ -489,7 +489,7 @@ def shell(lang, key, title, desc, body, schemas=(), og_image="/img/yard-wrecker.
     ui = UI[lang]
     nav_items = "".join(
         '<li><a href="%s"%s>%s</a></li>' % (url(k, lang), ' aria-current="page"' if (k == key or (key.startswith("area-") and k == "areas") or (key.startswith("post-") and k == "blog")) else "", escape(label))
-        for k, label in ui["nav"])
+        for k, label in ui["nav"] if k != "blog")  # Blog stays in the mobile menu and footer
     mobile_items = "".join('<a href="%s">%s</a>' % (url(k, lang), escape(label)) for k, label in ui["nav"])
     mobile_items += '<a href="%s" hreflang="%s" lang="%s">%s</a>' % (url(key, other), other, other, "English" if other == "en" else "Español")
     schema_html = "".join('<script type="application/ld+json">%s</script>' % json.dumps(s, ensure_ascii=False, separators=(",", ":")) for s in [business_schema(lang)] + list(schemas))
@@ -634,7 +634,7 @@ def page_home(lang):
 </ul></div></section>
 
 <section class="section light" id="services"><div class="wrap">
-  <div class="sec-head"><div><span class="kicker">{t('Two divisions. One phone.', 'Dos divisiones. Un teléfono.')}</span><h2>{t('Towing that shows up. Freight that arrives.', 'Grúas que llegan. Carga que se entrega.')}</h2></div>
+  <div class="sec-head"><div><span class="kicker">{t('Three divisions. One phone.', 'Tres divisiones. Un teléfono.')}</span><h2>{t('Towing that shows up. Freight that arrives.', 'Grúas que llegan. Carga que se entrega.')}</h2></div>
   <p>{t('Whether a loaded tractor-trailer is down on I-4 at 3 a.m. or you need steady capacity on a lane every week, you deal with the same Orlando company that has been doing this since 2004.', 'Ya sea un tractocamión cargado detenido en la I-4 a las 3 a.m. o capacidad constante en una ruta cada semana, usted trata con la misma empresa de Orlando que hace esto desde 2004.')}</p></div>
   <div class="divisions">
     <article class="division">
@@ -650,6 +650,13 @@ def page_home(lang):
       <p>{t('Capacity you can plan around — for shippers that move volume every week.', 'Capacidad con la que puede planificar — para empresas que mueven volumen cada semana.')}</p>
       {checks(t(['Dedicated lanes &amp; recurring schedules', 'General freight, steel &amp; building materials', 'Intermodal drayage &amp; mail freight', 'Florida, Southeast &amp; northbound lanes'], ['Rutas dedicadas y horarios recurrentes', 'Carga general, acero y materiales de construcción', 'Drayage intermodal y correo', 'Rutas en Florida, el Sureste y hacia el norte']))}
       <div class="ctas"><a class="btn btn-red" href="#quote" data-mode="freight">{t('Quote a Lane', 'Cotizar una Ruta')}</a><a class="btn btn-ghost" href="{url('freight', lang)}">{t('Freight details', 'Ver carga')}</a></div>
+    </article>
+    <article class="division rental">
+      <span class="tag">{t('Division 03 · Rental', 'División 03 · Renta')}</span>
+      <h3>{t('Portable Crane Rental', 'Renta de Grúa Portable')}</h3>
+      <p>{t('Rent our portable crane for your lifting and moving jobs in Central Florida.', 'Rente nuestra grúa portable para sus trabajos de levantar y mover en el centro de Florida.')}</p>
+      {checks(t(['With an experienced R&amp;J operator', 'Or without operator', 'Planned jobs booked ahead', 'Contractors, shops &amp; businesses'], ['Con operador de R&amp;J con experiencia', 'O sin operador', 'Trabajos programados con reserva', 'Contratistas, talleres y negocios']))}
+      <div class="ctas">{call_btn(lang, label=t('Check Availability', 'Consultar Disponibilidad'))}<a class="btn btn-ghost" href="{url('svc-rental', lang)}">{t('Rental details', 'Ver renta')}</a></div>
     </article>
   </div>
 </div></section>

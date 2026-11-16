@@ -358,3 +358,13 @@ a.lane:hover .city{color:var(--red)}
 .review-qr img{display:block;width:220px;height:220px}
 .review-qr figcaption{color:#0c0e11;font-weight:700;margin-top:8px}
 @media (max-width:600px){.review-band .ctas,.review-band .ctas .btn{width:100%}}
+/* Three divisions on the home page (towing, freight, crane rental) */
+.divisions{grid-template-columns:repeat(3,1fr)}
+.division.rental::before{background:#f5b301}
+.division .ctas{margin-top:auto;flex-wrap:wrap}
+@media (min-width:1181px){.division{padding:36px 28px 30px}.division h3{font-size:clamp(28px,2.4vw,36px)}}
+@media (max-width:1180px) and (min-width:961px){.divisions{grid-template-columns:1fr 1fr}.division.rental{grid-column:1/-1}}
+@media (max-width:960px){.divisions{grid-template-columns:1fr}}
+@media (max-width:1440px){.nav-links a{padding:10px 8px;font-size:16px}}
+@media (max-width:1240px){.nav .btn .btn-label{display:none}}
+@media (max-width:1080px){.nav-links a{padding:10px 6px;font-size:15px;letter-spacing:.5px}.logo-text{font-size:15px}}
