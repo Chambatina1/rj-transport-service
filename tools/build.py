@@ -953,7 +953,10 @@ def page_service(lang, sv):
     c = sv["content"][lang]
     crumbs = [(UI[lang]["home"], url("home", lang)), (sv["nav"][lang], url(key, lang))]
     tow = sv["mode"] == "tow"
-    ctas = (call_btn(lang, label=t("Call Now (407) 595-9726", "Llame Ya (407) 595-9726")) + quote_link(lang, mode="tow", label=t("Request a Tow", "Solicitar Grúa"))) if tow \
+    rental = sv["mode"] == "rental"
+    form_mode = "freight" if rental else sv["mode"]
+    ctas = (call_btn(lang) + quote_link(lang, mode="freight", label=t("Check availability", "Consultar disponibilidad"))) if rental else \
+        (call_btn(lang, label=t("Call Now (407) 595-9726", "Llame Ya (407) 595-9726")) + quote_link(lang, mode="tow", label=t("Request a Tow", "Solicitar Grúa"))) if tow \
         else (quote_link(lang, cls="btn btn-red", mode="freight", label=t("Get a Freight Quote", "Cotizar Carga")) + call_btn(lang, cls="btn btn-ghost"))
     body = page_hero(lang, crumbs, c["kicker"], c["h1"], c["lede"], img=sv["img"], ctas=ctas)
     body += f"""
@@ -965,13 +968,13 @@ def page_service(lang, sv):
 <section class="section"><div class="wrap">{features(c['features'])}
   <div style="margin-top:34px"><span class="kicker">{t('Where we work', 'Dónde trabajamos')}</span><div style="margin-top:14px">{chips(c['places'])}</div></div>
 </div></section>
-{cta_band(lang)}
+{cta_band(lang, *((t("Need the crane for a job?", "¿Necesita la grúa para un trabajo?"), t("With or without operator. One call to check availability.", "Con o sin operador. Una llamada para ver disponibilidad.")) if rental else ()))}
 <section class="section light"><div class="wrap">
   <div class="sec-head single"><span class="kicker">FAQ</span><h2>{t('Questions', 'Preguntas frecuentes')}</h2></div>
   {faq_block(c['faqs'])}
 </div></section>
 {related_services(lang, key)}
-{quote_section(lang, sv['mode'])}
+{quote_section(lang, form_mode)}
 """
     svc = service_schema(re.sub(r"<[^>]+>", "", c["h1"]).replace("&amp;", "&"), c["desc"], url(key, lang),
                          ["Orlando, FL", "Orange County, FL", "Central Florida"] + ([] if tow else ["Florida", "Southeastern United States"]), lang, sv["stype"])
