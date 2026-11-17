@@ -355,13 +355,20 @@ GALLERY = [
     ("cargo-trees", "Tall decorative structures hauled on a gooseneck trailer", "Estructuras decorativas altas en un tráiler cuello de ganso"),
     ("cargo-truck-haul", "Semi tractor transported on a flatbed trailer", "Tractocamión transportado sobre un tráiler de plataforma"),
     ("fleet-kenworth", "Kenworth tractor from the R&J fleet at the yard", "Tractocamión Kenworth de la flota de R&J en el patio"),
+    ("fleet-black-flatbed", "Black Kenworth tractor pulling a loaded flatbed", "Tractocamión Kenworth negro con un tráiler de plataforma cargado"),
+    ("fleet-purple-van", "Kenworth tractor with a dry van trailer", "Tractocamión Kenworth con un tráiler de caja seca"),
+    ("fleet-white-van", "White Kenworth tractor with a dry van at a warehouse dock", "Tractocamión Kenworth blanco con un tráiler de caja en un almacén"),
+]
+TOW_GALLERY = [
+    ("wrecker-road", "R&J heavy-duty wrecker towing a truck on the road", "Grúa pesada de R&J remolcando un camión en la carretera"),
+    ("wrecker-tow", "R&J heavy wrecker towing a box truck in Orlando", "Grúa pesada de R&J remolcando un camión de caja en Orlando"),
     ("wrecker", "R&J Kenworth heavy-duty wrecker", "Grúa pesada Kenworth de R&J"),
 ]
 
 
-def gallery(lang):
+def gallery(lang, items=None):
     out = ['<div class="gallery">']
-    for n, en, es in GALLERY:
+    for n, en, es in (items or GALLERY):
         alt = en if lang == "en" else es
         out.append('<figure><picture><source type="image/webp" srcset="/img/%s-sm.webp"><img src="/img/%s.jpg" alt="%s" loading="lazy" decoding="async" width="900" height="600"></picture><figcaption>%s</figcaption></figure>'
                    % (n, n, escape(alt), escape(alt)))
@@ -773,6 +780,12 @@ def page_towing(lang):
     <p>{t('Safety first: if you are on the highway, get yourself and your passengers out of traffic and call 911 if anyone is hurt.', 'Primero la seguridad: si está en la carretera, salga del tráfico con sus pasajeros y llame al 911 si hay heridos.')}</p></div>
   </div>
   <figure class="split-media"><picture><source type="image/webp" srcset="/img/orlando-yard.webp"><img src="/img/orlando-yard.jpg" alt="{t('R&amp;J heavy towing service sign — 24 hour service, Orlando FL', 'Letrero de grúa pesada R&amp;J — servicio 24 horas, Orlando FL')}" width="1000" height="960" loading="lazy" decoding="async"></picture><figcaption>{t('Heavy Towing · 24 Hour Service', 'Grúa Pesada · Servicio 24 Horas')}</figcaption></figure>
+</div></section>
+
+<section class="section"><div class="wrap">
+  <div class="sec-head"><div><span class="kicker">{t('Our wreckers', 'Nuestras grúas')}</span><h2>{t('Real tows. Our trucks.', 'Remolques reales. Nuestras grúas.')}</h2></div>
+  <p>{t('Our own heavy-duty wreckers on the job around Orlando.', 'Nuestras propias grúas pesadas trabajando en Orlando.')}</p></div>
+  {gallery(lang, TOW_GALLERY)}
 </div></section>
 
 {cta_band(lang)}
