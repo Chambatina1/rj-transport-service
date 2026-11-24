@@ -368,3 +368,23 @@ a.lane:hover .city{color:var(--red)}
 @media (max-width:1440px){.nav-links a{padding:10px 8px;font-size:16px}}
 @media (max-width:1240px){.nav .btn .btn-label{display:none}}
 @media (max-width:1080px){.nav-links a{padding:10px 6px;font-size:15px;letter-spacing:.5px}.logo-text{font-size:15px}}
+
+/* Photo carousel (real job photos) */
+.carousel{position:relative}
+.car-track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none;border-radius:var(--radius);outline-offset:4px}
+.car-track::-webkit-scrollbar{display:none}
+.car-slide{position:relative;flex:0 0 min(860px,86%);scroll-snap-align:center;aspect-ratio:4/3;max-height:72vh;margin:0;overflow:hidden;border-radius:var(--radius);background:#0b0d10}
+.car-slide img{width:100%;height:100%;object-fit:cover;display:block}
+.car-slide.tall img{object-fit:contain}
+.car-slide figcaption{position:absolute;left:0;right:0;bottom:0;padding:44px 18px 14px;font-size:15px;font-weight:600;line-height:1.35;color:#fff;background:linear-gradient(0deg,rgba(0,0,0,.82),transparent)}
+.car-btn{position:absolute;top:calc(50% - 40px);width:52px;height:52px;border-radius:50%;border:0;display:grid;place-items:center;background:rgba(12,14,17,.78);color:#fff;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.35);transition:background .2s}
+.car-btn:hover{background:var(--red)}
+.car-btn svg{width:26px;height:26px}
+.car-prev{left:10px}.car-next{right:10px}
+.car-bar{display:flex;align-items:center;gap:16px;margin-top:16px}
+.car-count{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:1px;min-width:64px}
+.car-dots{display:flex;flex-wrap:wrap;gap:7px}
+.car-dots button{width:10px;height:10px;padding:0;border-radius:50%;border:0;background:var(--line);cursor:pointer}
+.light .car-dots button{background:#c9c4b9}
+.car-dots button.on{background:var(--red);transform:scale(1.25)}
+@media (max-width:640px){.car-slide{flex-basis:92%}.car-btn{width:42px;height:42px}.car-slide figcaption{font-size:14px;padding:36px 14px 12px}}

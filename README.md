@@ -24,7 +24,7 @@ python3 -m http.server 8000 # preview at http://localhost:8000
 | `img/`, `media/` | Real company photos (fleet, wrecker, loads) and the home hero video collage (`media/hero-collage.mp4`/`.webm`, poster `img/hero-collage.*`). The video loads only on fast connections without reduced-motion. Neighbor signs are cropped/blurred. |
 
 ### Pages (each in English and Spanish, linked with hreflang)
-Home · Heavy Towing · Freight & Contracts · Service Areas (Orlando, Tampa, Miami, Jacksonville, Southeast) · Contact · Blog (3 posts)
+Home · Heavy Towing · Freight & Contracts · Crane rental (main, with operator, without operator, Central Florida) · Service Areas (Orlando, Tampa, Miami, Jacksonville, Southeast) · Contact · Blog (3 posts)
 
 ### Adding a blog post
 Add an entry to `BLOG_POSTS` in `tools/content.py` (both `en` and `es`), run the build, commit.

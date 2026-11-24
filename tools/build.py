@@ -188,7 +188,7 @@ def business_schema(lang):
         "legalName": SITE["legal"],
         "url": SITE["domain"] + "/",
         "logo": SITE["domain"] + "/img/logo.png",
-        "image": [SITE["domain"] + "/img/yard-wrecker.jpg", SITE["domain"] + "/img/wrecker.jpg", SITE["domain"] + "/img/orlando-yard.jpg"],
+        "image": [SITE["domain"] + "/img/yard-wrecker.jpg", SITE["domain"] + "/img/wrecker.jpg", SITE["domain"] + "/img/orlando-yard.jpg", SITE["domain"] + "/img/tow-semi-front-lift.jpg", SITE["domain"] + "/img/wrecker-road.jpg", SITE["domain"] + "/img/crane-loading-shed.jpg"],
         "telephone": "+1-407-595-9726",
         "email": SITE["email"],
         "priceRange": "$$",
@@ -355,18 +355,92 @@ GALLERY = [
     ("cargo-trees", "Tall decorative structures hauled on a gooseneck trailer", "Estructuras decorativas altas en un tráiler cuello de ganso"),
     ("cargo-truck-haul", "Semi tractor transported on a flatbed trailer", "Tractocamión transportado sobre un tráiler de plataforma"),
     ("fleet-kenworth", "Kenworth tractor from the R&J fleet at the yard", "Tractocamión Kenworth de la flota de R&J en el patio"),
+    ("fleet-black-flatbed", "Black Kenworth tractor pulling a loaded flatbed", "Tractocamión Kenworth negro con un tráiler de plataforma cargado"),
+    ("fleet-purple-van", "Kenworth tractor with a dry van trailer", "Tractocamión Kenworth con un tráiler de caja seca"),
+    ("fleet-white-van", "White Kenworth tractor with a dry van at a warehouse dock", "Tractocamión Kenworth blanco con un tráiler de caja en un almacén"),
+]
+TOW_GALLERY = [
+    ("wrecker-road", "R&J heavy-duty wrecker towing a truck on the road", "Grúa pesada de R&J remolcando un camión en la carretera"),
+    ("wrecker-tow", "R&J heavy wrecker towing a box truck in Orlando", "Grúa pesada de R&J remolcando un camión de caja en Orlando"),
     ("wrecker", "R&J Kenworth heavy-duty wrecker", "Grúa pesada Kenworth de R&J"),
 ]
 
 
-def gallery(lang):
+def gallery(lang, items=None):
     out = ['<div class="gallery">']
-    for n, en, es in GALLERY:
+    for n, en, es in (items or GALLERY):
         alt = en if lang == "en" else es
         out.append('<figure><picture><source type="image/webp" srcset="/img/%s-sm.webp"><img src="/img/%s.jpg" alt="%s" loading="lazy" decoding="async" width="900" height="600"></picture><figcaption>%s</figcaption></figure>'
                    % (n, n, escape(alt), escape(alt)))
     out.append("</div>")
     return "".join(out)
+
+
+# Photo carousel: real R&J jobs. (name, width, height, categories, alt EN, alt ES)
+# "old-" photos are prints from the owner's archive (older recoveries).
+SLIDES = [
+    ("tow-semi-front-lift", 1024, 768, "tow", "R&J heavy wrecker lifting a damaged semi truck on the road in Orlando", "Grúa pesada de R&J levantando un tractocamión dañado en la carretera en Orlando"),
+    ("wrecker-road", 1400, 933, "tow", "R&J heavy-duty wrecker towing a dump truck on a Florida highway", "Grúa pesada de R&J remolcando un camión de volteo en una carretera de Florida"),
+    ("tow-wrecker-tractor", 1200, 900, "tow", "R&J heavy wrecker hooking up a semi tractor for towing", "Grúa pesada de R&J enganchando un tractocamión para remolcarlo"),
+    ("crane-loading-shed", 1024, 768, "crane", "Crane on site and a storage shed loaded on a gooseneck trailer, Orlando", "Grúa en el sitio y caseta de almacenamiento cargada en tráiler cuello de ganso, Orlando"),
+    ("fleet-black-flatbed", 1400, 933, "freight", "R&J black Kenworth tractor pulling a loaded flatbed trailer", "Tractocamión Kenworth negro de R&J con un tráiler de plataforma cargado"),
+    ("wrecker-tow", 1400, 933, "tow", "R&J heavy wrecker towing a box truck in Orlando", "Grúa pesada de R&J remolcando un camión de caja en Orlando"),
+    ("tow-dump-truck", 900, 1200, "tow", "Dump truck lifted and chained to an R&J wrecker underlift", "Camión de volteo levantado y encadenado a la grúa de R&J"),
+    ("haul-shed-gooseneck", 1024, 768, "crane freight", "Storage shed delivered on a gooseneck trailer pulled by a heavy-duty pickup", "Caseta de almacenamiento transportada en tráiler cuello de ganso con camioneta pesada"),
+    ("fleet-purple-van", 1400, 933, "freight", "R&J Kenworth tractor with a dry van trailer", "Tractocamión Kenworth de R&J con tráiler de caja seca"),
+    ("tow-tractor-unit", 1200, 900, "tow", "R&J truck with tow unit moving a semi tractor", "Camión de R&J con equipo de remolque moviendo un tractocamión"),
+    ("haul-shed-strapped", 1024, 768, "crane freight", "Barn-style shed strapped down on a gooseneck flatbed trailer", "Caseta tipo granero amarrada en un tráiler cuello de ganso"),
+    ("cargo-crate", 1400, 933, "freight crane", "Oversized wooden crate secured on a gooseneck flatbed trailer", "Caja de madera sobredimensionada asegurada en un tráiler cuello de ganso"),
+    ("tow-cabover-truck", 768, 1024, "tow", "R&J wrecker towing an old cabover truck", "Grúa de R&J remolcando un camión antiguo de cabina sobre motor"),
+    ("fleet-white-van", 1400, 933, "freight", "White Kenworth tractor with a dry van at a warehouse dock", "Tractocamión Kenworth blanco con tráiler de caja en un almacén"),
+    ("tow-classic-pickup", 1200, 900, "tow", "Classic pickup truck being towed by an R&J truck", "Camioneta clásica remolcada por un camión de R&J"),
+    ("cargo-flatbed", 1400, 933, "freight crane", "Event and theme structures strapped on a flatbed trailer", "Estructuras para eventos amarradas en un tráiler de plataforma"),
+    ("tow-wrecker-side", 1024, 768, "tow", "R&J heavy-duty wrecker ready for a recovery", "Grúa pesada de R&J lista para un rescate"),
+    ("fleet-kenworth", 1400, 933, "freight", "Kenworth tractor from the R&J fleet at the yard", "Tractocamión Kenworth de la flota de R&J en el patio"),
+    ("cargo-trees", 1400, 933, "freight", "Tall decorative structures hauled on a gooseneck trailer", "Estructuras decorativas altas en un tráiler cuello de ganso"),
+    ("cargo-truck-haul", 1400, 933, "freight", "Semi tractor transported on a flatbed trailer", "Tractocamión transportado sobre un tráiler de plataforma"),
+    ("old-overturned-truck", 993, 719, "tow old", "Archive photo: overturned truck being recovered at an intersection", "Foto de archivo: rescate de un camión volcado en una intersección"),
+    ("old-reefer-upright", 993, 619, "tow old", "Archive photo: wrecker uprighting a refrigerated trailer", "Foto de archivo: grúa levantando un tráiler refrigerado"),
+    ("old-tractor-winch", 993, 655, "tow old", "Archive photo: winching a stuck semi tractor out of soft ground", "Foto de archivo: sacando con winche un tractocamión atascado"),
+    ("old-wrecked-tractor-lowboy", 993, 647, "tow old", "Archive photo: wrecked tractor hauled on a lowboy trailer", "Foto de archivo: tractocamión accidentado transportado en un tráiler lowboy"),
+    ("old-trailer-ditch", 993, 669, "tow old", "Archive photo: trailer stuck in a ditch before recovery", "Foto de archivo: tráiler atascado en una cuneta antes del rescate"),
+    ("old-wrecker-flatbed", 993, 545, "tow old", "Archive photo: heavy wrecker towing a wrecked flatbed truck", "Foto de archivo: grúa pesada remolcando un camión de plataforma accidentado"),
+    ("old-wrecker-truck", 993, 575, "tow old", "Archive photo: wrecker towing a damaged straight truck", "Foto de archivo: grúa remolcando un camión dañado"),
+]
+
+
+def carousel(lang, cat=None, kicker=None, title=None, sub=None, light=False):
+    """Swipeable photo carousel of real jobs. cat: 'tow', 'freight', 'crane' or None (home mix)."""
+    t = (lambda en, es: en if lang == "en" else es)
+    if cat:
+        items = [s for s in SLIDES if cat in s[3].split()]
+    else:
+        items = [s for s in SLIDES if "old" not in s[3].split()] + [s for s in SLIDES if s[0] in ("old-overturned-truck", "old-reefer-upright")]
+    n = len(items)
+    slides = []
+    for i, (name, w, h, cats, en, es) in enumerate(items):
+        alt = escape(en if lang == "en" else es)
+        tall = " tall" if h > w else ""
+        slides.append(
+            '<figure class="car-slide%s" role="group" aria-roledescription="%s" aria-label="%d / %d">'
+            '<picture><source type="image/webp" srcset="/img/%s-sm.webp 700w, /img/%s.webp %dw" sizes="(max-width:900px) 92vw, 860px">'
+            '<img src="/img/%s.jpg" alt="%s" width="%d" height="%d" loading="lazy" decoding="async"></picture>'
+            '<figcaption>%s</figcaption></figure>' % (tall, t("slide", "foto"), i + 1, n, name, name, w, name, alt, w, h, alt))
+    kicker = kicker or t("Our work", "Nuestros trabajos")
+    title = title or t("See our services in action", "Vea nuestros servicios en acción")
+    sub = sub or t("Real photos of R&amp;J tows, recoveries, freight loads and crane jobs. Swipe or use the arrows.",
+                   "Fotos reales de remolques, rescates, cargas y trabajos con grúa de R&amp;J. Deslice o use las flechas.")
+    return (
+        '<section class="section%s" id="photos"><div class="wrap">'
+        '<div class="sec-head"><div><span class="kicker">%s</span><h2>%s</h2></div><p>%s</p></div>'
+        '<div class="carousel" aria-roledescription="%s" aria-label="%s">'
+        '<div class="car-track" tabindex="0">%s</div>'
+        '<button class="car-btn car-prev" type="button" aria-label="%s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>'
+        '<button class="car-btn car-next" type="button" aria-label="%s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>'
+        '<div class="car-bar"><span class="car-count" aria-live="polite">1 / %d</span><div class="car-dots" aria-hidden="true"></div></div>'
+        '</div></div></section>'
+    ) % (" light" if light else "", kicker, title, sub, t("carousel", "carrusel"), t("R&amp;J job photos", "Fotos de trabajos de R&amp;J"),
+         "".join(slides), t("Previous photo", "Foto anterior"), t("Next photo", "Foto siguiente"), n)
 
 
 def reviews_section(lang):
@@ -661,6 +735,8 @@ def page_home(lang):
   </div>
 </div></section>
 
+{carousel(lang)}
+
 <section class="section" id="why"><div class="wrap">
   <div class="years">
     <div class="big" aria-hidden="true"><small>{t('On the road since', 'En la carretera desde')}</small>2004</div>
@@ -775,6 +851,8 @@ def page_towing(lang):
   <figure class="split-media"><picture><source type="image/webp" srcset="/img/orlando-yard.webp"><img src="/img/orlando-yard.jpg" alt="{t('R&amp;J heavy towing service sign — 24 hour service, Orlando FL', 'Letrero de grúa pesada R&amp;J — servicio 24 horas, Orlando FL')}" width="1000" height="960" loading="lazy" decoding="async"></picture><figcaption>{t('Heavy Towing · 24 Hour Service', 'Grúa Pesada · Servicio 24 Horas')}</figcaption></figure>
 </div></section>
 
+{carousel(lang, 'tow', t('Our wreckers', 'Nuestras grúas'), t('Real tows. Our trucks.', 'Remolques reales. Nuestras grúas.'), t('Our own heavy-duty wreckers on the job around Orlando, plus recoveries from our archive. Swipe or use the arrows.', 'Nuestras propias grúas pesadas trabajando en Orlando, y rescates de nuestro archivo. Deslice o use las flechas.'))}
+
 {cta_band(lang)}
 {review_band(lang)}
 
@@ -841,11 +919,7 @@ def page_freight(lang):
       ('route', 'Regional y hacia el norte', 'Toda Florida, el Sureste y rutas al norte por la I-75 y la I-95.'),
   ]))}
 </div></section>
-<section class="section"><div class="wrap">
-  <div class="sec-head"><div><span class="kicker">{t('On the road', 'En la carretera')}</span><h2>{t('Real loads. Our trucks.', 'Cargas reales. Nuestros camiones.')}</h2></div>
-  <p>{t('Oversized crates, flatbed loads, event structures and equipment — moved by our own drivers and trailers.', 'Cajas sobredimensionadas, cargas en plataforma, estructuras para eventos y equipo — movidos por nuestros propios choferes y tráileres.')}</p></div>
-  {gallery(lang)}
-</div></section>
+{carousel(lang, 'freight', t('On the road', 'En la carretera'), t('Real loads. Our trucks.', 'Cargas reales. Nuestros camiones.'), t('Oversized crates, flatbed loads, sheds, event structures and equipment, moved by our own drivers and trailers. Swipe or use the arrows.', 'Cajas sobredimensionadas, cargas en plataforma, casetas, estructuras para eventos y equipo, movidos por nuestros propios choferes y tráileres. Deslice o use las flechas.'))}
 
 <section class="section"><div class="wrap">
   <div class="sec-head"><div><span class="kicker">{t('For logistics &amp; procurement teams', 'Para equipos de logística y compras')}</span><h2>{t('How a contract with us works', 'Cómo funciona un contrato con nosotros')}</h2></div>
@@ -975,6 +1049,7 @@ def page_service(lang, sv):
 <section class="section"><div class="wrap">{features(c['features'])}
   <div style="margin-top:34px"><span class="kicker">{t('Where we work', 'Dónde trabajamos')}</span><div style="margin-top:14px">{chips(c['places'])}</div></div>
 </div></section>
+{carousel(lang, 'crane' if rental else ('tow' if tow else 'freight'), light=True)}
 {cta_band(lang, *((t("Need the crane for a job?", "¿Necesita la grúa para un trabajo?"), t("With or without operator. One call to check availability.", "Con o sin operador. Una llamada para ver disponibilidad.")) if rental else ()))}
 <section class="section light"><div class="wrap">
   <div class="sec-head single"><span class="kicker">FAQ</span><h2>{t('Questions', 'Preguntas frecuentes')}</h2></div>
